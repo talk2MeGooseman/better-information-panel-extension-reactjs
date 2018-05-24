@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
 import '../App.css';
 import '../Config.css'
 import 'typeface-roboto'
-import 'react-mde/lib/styles/css/react-mde-all.css';
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-import ReactMde, {ReactMdeTypes} from "react-mde";
 import * as Showdown from "showdown";
 import Stepper from '../components/Stepper';
 import InfoTabForm from '../components/InfoTabForm';
+import TabsStore from '../mobx/state/TabsStore';
+import TabbedInformation from '../components/TabbedInformation';
 
 const styles = theme => ({
   root: {
@@ -28,12 +29,23 @@ const styles = theme => ({
   paper: {
     textAlign: 'left',
   },
+  spacedContent: {
+    marginLeft: theme.spacing.unit,
+  },
+  editorSection: {
+    width: theme.spacing.unit * 40,
+  },
   control: {
     padding: theme.spacing.unit * 2,
   },
 });
 
-class App extends Component {
+@observer
+class ConfigView extends Component {
+  propsTypes = {
+    tabsStore: PropTypes.object.isRequired,
+  };
+
   constructor(props) {
       super(props);
       this.state = {
@@ -42,33 +54,35 @@ class App extends Component {
       this.converter = new Showdown.Converter({tables: true, simplifiedAutoLink: true});
   }
 
-  handleValueChange = (mdeState) => {
-    this.setState({mdeState});
-  }
 
   render() {
-    const { classes } = this.props;
+    const { classes, tabsStore } = this.props;
 
     return (
       <div className={classes.root}>
         <Stepper /> 
         <Paper className={classes.rootPaper}>
-          <Grid container justify="center" spacing={8}>
+          <Grid container spacing={8}>
             <Grid item xs={2} justify="center">
-              <Typography variant="headline" gutterBottom>
-                Add Tab
-              </Typography>
-              <InfoTabForm /> 
+              <section className={classes.spacedContent}>
+                <Typography variant="headline" gutterBottom>
+                  Add Tab
+                </Typography>
+                <InfoTabForm tabsStore={tabsStore} /> 
+              </section>
             </Grid>
-            <Grid item xs={6}>
-              <ReactMde
-                onChange={this.handleValueChange}
-                editorState={this.state.mdeState}
-              />
+
+            <Grid item xs={3}>
+              <section className={classes.editorSection}>
+                <TabbedInformation tabsStore={tabsStore} />
+
+              </section>
             </Grid>
+
             <Grid item xs={4}>
               <Paper className={classes.paper}>
                 Preview
+                {JSON.stringify(tabsStore.tabs)}
               </Paper>
             </Grid>
           </Grid>
@@ -78,5 +92,5 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(ConfigView);
 

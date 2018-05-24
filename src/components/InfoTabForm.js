@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import TabSectionInfoInputGroup from './TabSectionInfoInputGroup';
 import { Divider } from '@material-ui/core';
+import { observer } from 'mobx-react';
 
 const MAX_TABS = 3;
 
@@ -15,30 +16,26 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
   },
   button: {
     margin: theme.spacing.unit,
   },
 });
 
+@observer
 class InfoTabForm extends React.Component {
-  state = {
-    tabs: []
-  };
-
   componentWillMount() {
-    this.setState({
-      tabs: [this.newInfoTabData()]
-    })
+      this.props.tabsStore.addTab(this.newInfoTabData());
   }
 
   newInfoTabData() {
     return {
-      title: '',
-      textColor: '',
-      bgColor: '',
-      body: '',
+      title: 'Title',
+      textColor: '#000000',
+      bgColor: '#ffffff',
+      body: 'Info Here',
     };
   };
 
@@ -50,20 +47,20 @@ class InfoTabForm extends React.Component {
   };
 
   handleAddTab = () => {
-    if(this.state.tabs.length < MAX_TABS) {
-      let tabs = [...this.state.tabs, this.newInfoTabData()];
-
-      this.setState({
-        tabs: tabs
-      });
+    let { tabsStore } = this.props
+    if(tabsStore.tabCount < MAX_TABS) {
+      this.props.tabsStore.addTab(this.newInfoTabData());
     }
   };
 
   renderTabInputs() {
-    return this.state.tabs.map((tab) => {
+    let count = 1;
+    let { tabsStore } = this.props
+
+    return tabsStore.tabs.map((tabData) => {
       return (
         <React.Fragment>
-          <TabSectionInfoInputGroup />
+          <TabSectionInfoInputGroup tabsStore={tabsStore} index={count++} tabData={tabData} />
           <Divider/>
         </React.Fragment>
       );
@@ -71,13 +68,15 @@ class InfoTabForm extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, tabsStore } = this.props;
+
+    const disableButton = tabsStore.tabCount >= MAX_TABS;
 
     return (
       <div className={classes.container}>
-        <FormControl className={classes.formControl}>
+        <FormControl>
           { this.renderTabInputs() }
-          <Button onClick={this.handleAddTab} variant="fab" color="primary" aria-label="add" className={classes.button}>
+          <Button disabled={disableButton} onClick={this.handleAddTab} variant="fab" color="primary" aria-label="add" className={classes.button}>
             <AddIcon />
           </Button>
         </FormControl>
@@ -88,6 +87,7 @@ class InfoTabForm extends React.Component {
 
 InfoTabForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  tabsStore: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(InfoTabForm);

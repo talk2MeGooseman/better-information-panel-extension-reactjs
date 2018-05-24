@@ -5,13 +5,16 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Config from './Views/Config';
 import {CONFIG_MODE, VIEWER_MODE} from './services/constants'
+import TabsStore from './mobx/state/TabsStore';
 
 const params = new URLSearchParams(window.location.search)
 let viewComponent;
 
+let tabsStore = new TabsStore();
+
 switch (params.get('mode')) {
   case CONFIG_MODE:
-    viewComponent = <Config />;
+    viewComponent = <Config tabsStore={tabsStore} />;
     break;
   case VIEWER_MODE:
     viewComponent = <div />;

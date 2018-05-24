@@ -1,12 +1,16 @@
 'use strict'
-
 import React from 'react'
 import reactCSS from 'reactcss'
 import { ChromePicker } from 'react-color'
+import { PropTypes } from 'prop-types';
 
 class ColorPicker extends React.Component {
   static defaultProps = {
     color: '#000000',
+  };
+
+  propTypes = {
+    handleChange: PropTypes.func.isRequired,
   };
 
   state = {
@@ -14,22 +18,12 @@ class ColorPicker extends React.Component {
     color: '#000000',
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state.color = props.color;
-  }
-
   handleClick = () => {
     this.setState({ displayColorPicker: !this.state.displayColorPicker })
   };
 
   handleClose = () => {
     this.setState({ displayColorPicker: false })
-  };
-
-  handleChange = (color) => {
-    this.setState({ color: color.hex})
   };
 
   render() {
@@ -40,7 +34,7 @@ class ColorPicker extends React.Component {
           width: '36px',
           height: '14px',
           borderRadius: '2px',
-          background: `${this.state.color}`,
+          background: `${this.props.color}`,
         },
         swatch: {
           padding: '5px',
@@ -71,7 +65,7 @@ class ColorPicker extends React.Component {
         </div>
         { this.state.displayColorPicker ? <div style={ styles.popover }>
           <div style={ styles.cover } onClick={ this.handleClose }/>
-          <ChromePicker color={ this.state.color } disableAlpha={true} onChange={ this.handleChange } />
+          <ChromePicker color={ this.props.color } disableAlpha={true} onChange={ this.props.handleChange } />
         </div> : null }
 
       </div>
