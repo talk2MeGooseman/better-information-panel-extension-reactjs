@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
@@ -6,30 +6,47 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import 'react-mde/lib/styles/css/react-mde-all.css';
-import ReactMde from "react-mde";
-import {EditorState} from "draft-js";
+import * as Showdown from "showdown";
+import ReactHtmlParser from 'react-html-parser';
+
+// TODO Look in to prevent XSS in the markdown
+// TODO Wire in colors to change text and background
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
   },
   tabRoot: {
     minWidth: theme.spacing.unit * 8,
+  },
+  tabBody: {
+    height: '436px'
   }
 });
 
 @observer
-class TabbedInformation extends React.Component {
-
+class BetterInformationPanel extends Component {
   propTypes = {
     tabsStore: PropTypes.object.isRequired,
   };
 
   state = {
     value: 0,
-    mdeState: null,
   };
+
+  constructor(props) {
+    super(props);
+    this.converter = new Showdown.Converter({
+      tables: true,
+      simplifiedAutoLink: true,
+      strikethrough: true,
+      tasklists: true,
+      parseImgDimensions: true,
+      smoothLivePreview: true,
+      openLinksInNewWindow: true,
+      emoji: true,
+      simpleLineBreaks: true,
+    });
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -46,40 +63,18 @@ class TabbedInformation extends React.Component {
     });
   }
 
-  async createMdeState(tabData) {
-    let editorState = {
-      html: "",
-      markdown: tabData.body,
-      draftEditorState: EditorState.createEmpty(),
-    };
-
-    return editorState;
-  }
-
-  // TODO Need to add this whole thing into its on stateful compoenent
-  // SO the the editor doesnt struggle to keep state
-  renderBodyEditor() {
-    let { tabsStore } = this.props;
-    return tabsStore.tabs.map((tab) => {
-      let mdeState = this.createMdeState(tab);
-
-      const handleValueChange = (mdeState) => {
-        tab.body = mdeState.markdown;
-      }
-
-      return (
-        <ReactMde
-          onChange={handleValueChange}
-          editorState={mdeState}
-        />
-      );
-    });
+  renderTabBody() {
+    const { tabsStore, classes} = this.props;
+    return tabsStore.tabs.map((tab) => (
+      <div className={classes.tabBody}>
+        {ReactHtmlParser(this.converter.makeHtml(tab.body))}
+      </div>
+    ));
   }
 
   render() {
-    const { classes, theme } = this.props;
-
-    return (
+    const { classes, theme, tabsStore } = this.props;
+    return(
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
@@ -97,16 +92,11 @@ class TabbedInformation extends React.Component {
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
-          {this.renderBodyEditor()}
+          {this.renderTabBody()}
         </SwipeableViews>
       </div>
     );
   }
 }
 
-TabbedInformation.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles, { withTheme: true })(TabbedInformation);
+export default withStyles(styles, { withTheme: true })(BetterInformationPanel);

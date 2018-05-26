@@ -14,7 +14,10 @@ import * as Showdown from "showdown";
 import Stepper from '../components/Stepper';
 import InfoTabForm from '../components/InfoTabForm';
 import TabsStore from '../mobx/state/TabsStore';
-import TabbedInformation from '../components/TabbedInformation';
+import TabsEditor from '../components/TabsEditor';
+import BetterInformationPanel from './BetterInformationPanel';
+
+import DevTools from 'mobx-react-devtools';
 
 const styles = theme => ({
   root: {
@@ -24,10 +27,15 @@ const styles = theme => ({
     flex: 1,
   },
   rootPaper: {
-    height: '100vh',
+    height: '90vh',
   },
   paper: {
     textAlign: 'left',
+  },
+  panelPreviewPaper: {
+    width: '320px',
+    height: '500px',
+    overflowX: 'hidden',
   },
   spacedContent: {
     marginLeft: theme.spacing.unit,
@@ -60,7 +68,8 @@ class ConfigView extends Component {
 
     return (
       <div className={classes.root}>
-        <Stepper /> 
+        <DevTools />
+        <Stepper />
         <Paper className={classes.rootPaper}>
           <Grid container spacing={8}>
             <Grid item xs={2} justify="center">
@@ -68,21 +77,25 @@ class ConfigView extends Component {
                 <Typography variant="headline" gutterBottom>
                   Add Tab
                 </Typography>
-                <InfoTabForm tabsStore={tabsStore} /> 
+                <InfoTabForm tabsStore={tabsStore} />
               </section>
             </Grid>
 
             <Grid item xs={3}>
+              <Typography variant="headline" gutterBottom>
+                Enter Text
+              </Typography>
               <section className={classes.editorSection}>
-                <TabbedInformation tabsStore={tabsStore} />
-
+                <TabsEditor tabsStore={tabsStore} />
               </section>
             </Grid>
 
             <Grid item xs={4}>
-              <Paper className={classes.paper}>
+              <Typography variant="headline" gutterBottom>
                 Preview
-                {JSON.stringify(tabsStore.tabs)}
+              </Typography>
+              <Paper className={classes.panelPreviewPaper}>
+                <BetterInformationPanel tabsStore={tabsStore} />
               </Paper>
             </Grid>
           </Grid>

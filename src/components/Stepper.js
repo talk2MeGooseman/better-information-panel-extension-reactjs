@@ -21,7 +21,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Add your tabs', 'Enter you text', 'Preview', 'Save'];
+  return ['Add your tabs', 'Enter your text', 'Preview', 'Save'];
 }
 
 function getStepContent(step) {
