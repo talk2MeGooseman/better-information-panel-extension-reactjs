@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+
 import TabSectionInfoInputGroup from './TabSectionInfoInputGroup';
-import { Divider } from '@material-ui/core';
+
 import { observer } from 'mobx-react';
 
 const MAX_TABS = 3;
@@ -27,17 +29,8 @@ const styles = theme => ({
 @observer
 class InfoTabForm extends React.Component {
   componentWillMount() {
-      this.props.tabsStore.addTab(this.newInfoTabData());
+      this.props.tabsStore.addTab();
   }
-
-  newInfoTabData() {
-    return {
-      title: 'Title',
-      textColor: '#000000',
-      bgColor: '#ffffff',
-      body: 'Info Here',
-    };
-  };
 
   handleChange = event => {
     if (!event || !event.target) {
@@ -49,7 +42,7 @@ class InfoTabForm extends React.Component {
   handleAddTab = () => {
     let { tabsStore } = this.props
     if(tabsStore.tabCount < MAX_TABS) {
-      this.props.tabsStore.addTab(this.newInfoTabData());
+      this.props.tabsStore.addTab();
     }
   };
 
@@ -60,8 +53,7 @@ class InfoTabForm extends React.Component {
     return tabsStore.tabs.map((tabData) => {
       return (
         <React.Fragment>
-          <TabSectionInfoInputGroup tabsStore={tabsStore} index={count++} tabData={tabData} />
-          <Divider/>
+          <TabSectionInfoInputGroup key={tabData.id} tabsStore={tabsStore} index={count++} tabData={tabData} />
         </React.Fragment>
       );
     });

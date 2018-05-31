@@ -6,7 +6,6 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {EditorState} from "draft-js";
 import Editor from './Editor';
 
 const styles = theme => ({
@@ -43,7 +42,7 @@ class TabsEditor extends React.Component {
   renderTabs() {
     let { classes, tabsStore } = this.props;
     return tabsStore.tabs.map((tab) => {
-      return <Tab label={tab.title} classes={{ root: classes.tabRoot }} />
+      return <Tab key={tab.id} label={tab.title} classes={{ root: classes.tabRoot }} />
     });
   }
 
@@ -51,7 +50,7 @@ class TabsEditor extends React.Component {
     let { tabsStore } = this.props;
 
     return tabsStore.tabs.map((tab) => (
-      <Editor tab={tab} />
+      <Editor key={tab.id} tab={tab} />
     ));
   }
 

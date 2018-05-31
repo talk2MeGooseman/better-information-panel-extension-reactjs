@@ -9,11 +9,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Done from '@material-ui/icons/Done';
 
 import * as Showdown from "showdown";
 import Stepper from '../components/Stepper';
 import InfoTabForm from '../components/InfoTabForm';
-import TabsStore from '../mobx/state/TabsStore';
 import TabsEditor from '../components/TabsEditor';
 import BetterInformationPanel from './BetterInformationPanel';
 
@@ -27,7 +29,6 @@ const styles = theme => ({
     flex: 1,
   },
   rootPaper: {
-    height: '90vh',
   },
   paper: {
     textAlign: 'left',
@@ -46,6 +47,12 @@ const styles = theme => ({
   control: {
     padding: theme.spacing.unit * 2,
   },
+  doneIcon: {
+    marginLeft: theme.spacing.unit
+  },
+  button: {
+    marginTop: theme.spacing.unit * 5,
+  }
 });
 
 @observer
@@ -62,6 +69,10 @@ class ConfigView extends Component {
       this.converter = new Showdown.Converter({tables: true, simplifiedAutoLink: true});
   }
 
+  onClickSave = () => {
+    const { tabsStore } = this.props;
+    console.log(tabsStore.toJS());
+  }
 
   render() {
     const { classes, tabsStore } = this.props;
@@ -97,6 +108,13 @@ class ConfigView extends Component {
               <Paper className={classes.panelPreviewPaper}>
                 <BetterInformationPanel tabsStore={tabsStore} />
               </Paper>
+            </Grid>
+
+            <Grid item xs={1}>
+              <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
+                Save
+                <Done className={classes.doneIcon} />
+              </Button>
             </Grid>
           </Grid>
         </Paper>

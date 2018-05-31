@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import reactCSS from 'reactcss'
 import { ChromePicker } from 'react-color'

@@ -19,9 +19,23 @@ const styles = theme => ({
     minWidth: theme.spacing.unit * 8,
   },
   tabBody: {
-    height: '436px'
+    height: '436px',
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
   }
 });
+
+const SHOWDOWN_CONFIG = {
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true,
+  parseImgDimensions: true,
+  smoothLivePreview: true,
+  openLinksInNewWindow: true,
+  emoji: true,
+  simpleLineBreaks: true,
+};
 
 @observer
 class BetterInformationPanel extends Component {
@@ -35,17 +49,7 @@ class BetterInformationPanel extends Component {
 
   constructor(props) {
     super(props);
-    this.converter = new Showdown.Converter({
-      tables: true,
-      simplifiedAutoLink: true,
-      strikethrough: true,
-      tasklists: true,
-      parseImgDimensions: true,
-      smoothLivePreview: true,
-      openLinksInNewWindow: true,
-      emoji: true,
-      simpleLineBreaks: true,
-    });
+    this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
   }
 
   handleChange = (event, value) => {
@@ -59,21 +63,28 @@ class BetterInformationPanel extends Component {
   renderTabs() {
     let { classes, tabsStore } = this.props;
     return tabsStore.tabs.map((tab) => {
-      return <Tab label={tab.title} classes={{ root: classes.tabRoot }} />
+      return <Tab key={tab.id} label={tab.title} classes={{ root: classes.tabRoot }} />
     });
   }
 
   renderTabBody() {
     const { tabsStore, classes} = this.props;
-    return tabsStore.tabs.map((tab) => (
-      <div className={classes.tabBody}>
-        {ReactHtmlParser(this.converter.makeHtml(tab.body))}
-      </div>
-    ));
+    return tabsStore.tabs.map((tab) => {
+      let styles = {
+        color: tab.textColor,
+        background: tab.bgColor,
+      };
+
+      return (
+        <div key={tab.id} style={styles} className={classes.tabBody}>
+          {ReactHtmlParser(this.converter.makeHtml(tab.body))}
+        </div>
+      );
+    });
   }
 
   render() {
-    const { classes, theme, tabsStore } = this.props;
+    const { classes, theme } = this.props;
     return(
       <div className={classes.root}>
         <AppBar position="static" color="default">
