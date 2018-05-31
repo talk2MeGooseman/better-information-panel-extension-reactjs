@@ -81,7 +81,7 @@ class ConfigView extends Component {
               </section>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography variant="headline" gutterBottom>
                 Enter Text
               </Typography>
