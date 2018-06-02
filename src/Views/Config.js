@@ -71,7 +71,7 @@ class ConfigView extends Component {
 
   onClickSave = () => {
     const { tabsStore } = this.props;
-    console.log(tabsStore.toJS());
+    tabsStore.saveTabs();
   }
 
   render() {

@@ -34,6 +34,10 @@ class AuthWrapper extends PureComponent {
       console.log('The JWT that will be passed to the EBS is', auth.token);
       console.log('The channel ID is', auth.channelId);
 
+      this.props.tabsStore.token = auth.token;
+
+      this.props.tabsStore.fetchTabs();
+
       // TODO Only set this to false once we fetch data from server
       this.setState({
         loading: false
