@@ -21,7 +21,7 @@ const styles = theme => ({
 });
 
 class AuthWrapper extends PureComponent {
-  propTypes = {
+  static propTypes = {
     tabsStore: PropTypes.object.isRequired,
   };
 
@@ -31,9 +31,6 @@ class AuthWrapper extends PureComponent {
 
   componentDidMount() {
     window.Twitch.ext.onAuthorized((auth) => {
-      console.log('The JWT that will be passed to the EBS is', auth.token);
-      console.log('The channel ID is', auth.channelId);
-
       this.props.tabsStore.token = auth.token;
 
       this.props.tabsStore.fetchTabs();

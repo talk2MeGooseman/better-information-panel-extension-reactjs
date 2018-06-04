@@ -7,6 +7,7 @@ import Config from './Views/Config';
 import AuthWrapper from './components/AuthWrapper'
 import {CONFIG_MODE, VIEWER_MODE} from './services/constants'
 import TabsStore from './mobx/state/TabsStore';
+import BetterInformationPanel from './Views/BetterInformationPanel';
 
 // Get the params from the url
 const params = new URLSearchParams(window.location.search)
@@ -21,7 +22,7 @@ switch (params.get('mode')) {
     viewComponent = <AuthWrapper tabsStore={tabsStore}> <Config tabsStore={tabsStore} /> </AuthWrapper>;
     break;
   case VIEWER_MODE:
-    viewComponent = <div />;
+    viewComponent = <AuthWrapper tabsStore={tabsStore}> <BetterInformationPanel tabsStore={tabsStore} /> </AuthWrapper>;
     break;
   default:
     viewComponent = <div>Nothing Loaded</div>;

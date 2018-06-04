@@ -14,6 +14,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 const styles = theme => ({
   root: {
+    background: '#fff'
   },
   tabRoot: {
     minWidth: theme.spacing.unit * 8,
@@ -39,7 +40,7 @@ const SHOWDOWN_CONFIG = {
 
 @observer
 class BetterInformationPanel extends Component {
-  propTypes = {
+  static propTypes = {
     tabsStore: PropTypes.object.isRequired,
   };
 
@@ -84,9 +85,19 @@ class BetterInformationPanel extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, tabsStore } = this.props;
+    const { value } = this.state;
+    const selectedTab = tabsStore.tabs[value];
+    if (!selectedTab) {
+      return null;
+    }
+
+    const styles = {
+      background: selectedTab.bgColor,
+    }
+
     return(
-      <div className={classes.root}>
+      <div className={classes.root} style={styles}>
         <AppBar position="static" color="default">
           <Tabs
             value={this.state.value}
