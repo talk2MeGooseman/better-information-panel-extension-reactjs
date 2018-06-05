@@ -29,21 +29,25 @@ const styles = theme => ({
 });
 
 const TabSectionInfoInputGroup = observer((props) => {
-  const { classes } = props;
+  const { classes, tabsStore } = props;
   const handleTitleChange = (event) => {
     props.tabData.title = event.target.value;
+    tabsStore.saveState = '';
   };
 
   const handleTextColorChange = (color) => {
     props.tabData.textColor = color.hex;
+    tabsStore.saveState = '';
   };
 
   const handleBgColorChange = (color) => {
     props.tabData.bgColor = color.hex;
+    tabsStore.saveState = '';
   };
 
   const handleDeleteClick = () => {
     props.tabData.destroy();
+    tabsStore.saveState = '';
   };
 
   let action = null;
@@ -87,6 +91,7 @@ TabSectionInfoInputGroup.propTypes = {
   classes: PropTypes.object.isRequired,
   index: PropTypes.number,
   tabData: PropTypes.object.isRequired,
+  tabsStore: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(TabSectionInfoInputGroup);

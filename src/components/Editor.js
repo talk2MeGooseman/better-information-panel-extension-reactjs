@@ -8,8 +8,9 @@ import {EditorState, ContentState} from "draft-js";
 
 @observer
 export default class Editor extends React.Component {
-  propTypes = {
+  static propTypes = {
     tab: PropTypes.object.isRequired,
+    tabsStore: PropTypes.object.isRequired,
   };
 
   state = {
@@ -37,6 +38,7 @@ export default class Editor extends React.Component {
       mdeState: newMdeState,
     });
 
+    this.props.tabsStore.saveState = '';
     this.props.tab.body = newMdeState.markdown;
   }
 

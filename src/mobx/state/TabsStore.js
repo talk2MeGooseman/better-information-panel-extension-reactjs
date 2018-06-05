@@ -2,7 +2,8 @@ import {
   observable,
   computed,
   reaction,
-  action
+  action,
+  autorun
 } from "mobx"
 import TabModel from "../model/TabModel";
 import { uuid } from "../../services/Utils";
@@ -10,56 +11,76 @@ import {
   setPanelInformation,
   getPanelInformation
 } from "../../services/Ebs";
+import {
+  DEFAULT_BODY_TEXT,
+  ACTIVE_STEP_1,
+  ACTIVE_STEP_2,
+  ACTIVE_STEP_3,
+  ACTIVE_STEP_4,
+} from "../../services/constants";
 
 export default class TabsStore {
   @observable tabs = [];
   @observable token;
-  @observable saveState = "pending";
+  @observable saveState = "";
+  @observable loadingState = "pending";
+  @observable activeStep = ACTIVE_STEP_1;
 
   @computed get tabCount() {
     return this.tabs.length;
   }
 
   addTab() {
+    this.saveState = '';
+
+    if (this.activeStep === ACTIVE_STEP_1) {
+      this.activeStep = ACTIVE_STEP_2;
+    }
+
     this.tabs.push(TabModel.fromJS(this, {
       id: uuid(),
-      title: 'Title',
+      title: 'Add Title',
       textColor: '#000000',
       bgColor: '#ffffff',
-      body: 'Info Here',
+      body: DEFAULT_BODY_TEXT,
     }));
   }
 
   @action
   fetchTabs() {
-    this.state = "pending"
+    this.loadingState = "pending"
     getPanelInformation(this.token).then(
       // inline created action
       action("fetchSuccess", result => {
+        this.loadingState = "done"
+        if (!result.tabs) {
+          return;
+        }
+        this.activeStep = ACTIVE_STEP_4;
         this.tabs = result.tabs.map((tab) => {
           return TabModel.fromJS(this, tab);
         })
 
-        this.state = "done"
       }),
       // inline created action
       action("fetchError", error => {
-        this.state = "error"
+        this.loadingState = "error"
       })
     )
   }
 
   @action
   saveTabs() {
-    this.state = "pending"
+    this.saveState = "pending"
     setPanelInformation(this.token, this.toJS()).then(
       // inline created action
       action("fetchSuccess", result => {
-        this.state = "done"
+        this.saveState = "done"
+        this.activeStep = ACTIVE_STEP_4;
       }),
       // inline created action
       action("fetchError", error => {
-        this.state = "error"
+        this.saveState = "error"
       })
     )
   }

@@ -50,7 +50,7 @@ class TabsEditor extends React.Component {
     let { tabsStore } = this.props;
 
     return tabsStore.tabs.map((tab) => (
-      <Editor key={tab.id} tab={tab} />
+      <Editor key={tab.id} tab={tab} tabsStore={tabsStore} />
     ));
   }
 

@@ -28,10 +28,6 @@ const styles = theme => ({
 
 @observer
 class InfoTabForm extends React.Component {
-  componentWillMount() {
-      this.props.tabsStore.addTab();
-  }
-
   handleChange = event => {
     if (!event || !event.target) {
       return;

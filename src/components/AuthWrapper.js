@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+
+import { LOAD_DONE, LOAD_ERROR, LOAD_PENDING } from "../services/constants";
 
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,13 +23,10 @@ const styles = theme => ({
   },
 });
 
+@observer
 class AuthWrapper extends PureComponent {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
-  };
-
-  state = {
-    loading: true,
   };
 
   componentDidMount() {
@@ -34,11 +34,6 @@ class AuthWrapper extends PureComponent {
       this.props.tabsStore.token = auth.token;
 
       this.props.tabsStore.fetchTabs();
-
-      // TODO Only set this to false once we fetch data from server
-      this.setState({
-        loading: false
-      });
     });
   }
 
@@ -59,9 +54,10 @@ class AuthWrapper extends PureComponent {
   }
 
   render() {
-    if (this.state.loading) {
+    const { tabsStore } = this.props;
+    if (tabsStore.loadingState === LOAD_PENDING) {
       return this.renderLoading();
-    } else {
+    } else if(tabsStore.loadingState === LOAD_DONE) {
       return this.props.children;
     }
   }

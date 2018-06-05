@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -22,50 +24,24 @@ function getSteps() {
   return ['Add your tabs', 'Enter your text', 'Preview', 'Save'];
 }
 
-class HorizontalLinearStepper extends React.Component {
+@observer
+class ProgressBar extends React.Component {
   static propTypes = {
     classes: PropTypes.object,
-  };
-
-  state = {
-    activeStep: 0,
-  };
-
-  isStepOptional = step => {
-    return step === 1;
-  };
-
-  handleNext = () => {
-    const { activeStep } = this.state;
-
-    this.setState({
-      activeStep: activeStep + 1,
-    });
-  };
-
-  handleBack = () => {
-    const { activeStep } = this.state;
-    this.setState({
-      activeStep: activeStep - 1,
-    });
-  };
-
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
-    });
+    tabsStore: PropTypes.object.isRequired,
   };
 
   render() {
     const { classes } = this.props;
     const steps = getSteps();
-    const { activeStep } = this.state;
+    const { activeStep } = this.props.tabsStore;
 
     return (
       <div className={classes.root}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
-            const props = {};
+            const props = {
+            };
             const labelProps = {};
             return (
               <Step key={label} {...props}>
@@ -79,4 +55,4 @@ class HorizontalLinearStepper extends React.Component {
   }
 }
 
-export default withStyles(styles)(HorizontalLinearStepper);
+export default withStyles(styles)(ProgressBar);

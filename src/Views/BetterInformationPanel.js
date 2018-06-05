@@ -20,7 +20,7 @@ const styles = theme => ({
     minWidth: theme.spacing.unit * 8,
   },
   tabBody: {
-    height: '436px',
+    height: '431px',
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
   }
@@ -51,6 +51,14 @@ class BetterInformationPanel extends Component {
   constructor(props) {
     super(props);
     this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
+  }
+
+  componentDidMount() {
+    const { tabsStore } = this.props;
+
+    if (tabsStore.tabCount === 0) {
+      tabsStore.addTab();
+    }
   }
 
   handleChange = (event, value) => {
@@ -96,6 +104,10 @@ class BetterInformationPanel extends Component {
       background: selectedTab.bgColor,
     }
 
+    const slideStyles = {
+      maxHeight: '452px',
+    }
+
     return(
       <div className={classes.root} style={styles}>
         <AppBar position="static" color="default">
@@ -113,6 +125,7 @@ class BetterInformationPanel extends Component {
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
+          slideStyle={slideStyles}
         >
           {this.renderTabBody()}
         </SwipeableViews>

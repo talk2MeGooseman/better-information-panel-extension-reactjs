@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import '../App.css';
 import '../Config.css'
 import 'typeface-roboto'
+import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -12,14 +13,16 @@ import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Done from '@material-ui/icons/Done';
+import ErrorIcon from '@material-ui/icons/Error';
+import CachedIcon from '@material-ui/icons/Cached';
 
 import * as Showdown from "showdown";
-import Stepper from '../components/Stepper';
+import ProgressBar from '../components/ProgressBar';
 import InfoTabForm from '../components/InfoTabForm';
 import TabsEditor from '../components/TabsEditor';
 import BetterInformationPanel from './BetterInformationPanel';
 
-import DevTools from 'mobx-react-devtools';
+// import DevTools from 'mobx-react-devtools';
 
 const styles = theme => ({
   root: {
@@ -35,7 +38,7 @@ const styles = theme => ({
   },
   panelPreviewPaper: {
     width: '320px',
-    height: '500px',
+    height: '502px',
     overflowX: 'hidden',
   },
   spacedContent: {
@@ -74,13 +77,32 @@ class ConfigView extends Component {
     tabsStore.saveTabs();
   }
 
+  renderSaveState() {
+    const { tabsStore, classes } = this.props;
+    let jsx = null;
+    switch (tabsStore.saveState) {
+      case SAVE_PENDING:
+        jsx = <CachedIcon className={classes.doneIcon} />
+        break;
+      case SAVE_DONE:
+        jsx = <Done className={classes.doneIcon} />
+        break;
+      case SAVE_ERROR:
+        jsx = <ErrorIcon className={classes.doneIcon} />
+        break;
+      default:
+        break;
+    }
+
+    return jsx;
+  }
+
   render() {
     const { classes, tabsStore } = this.props;
 
     return (
       <div className={classes.root}>
-        <DevTools />
-        <Stepper />
+        <ProgressBar tabsStore={tabsStore} />
         <Paper className={classes.rootPaper}>
           <Grid container spacing={8}>
             <Grid item xs={2} justify="center">
@@ -113,7 +135,7 @@ class ConfigView extends Component {
             <Grid item xs={1}>
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
                 Save
-                <Done className={classes.doneIcon} />
+                {this.renderSaveState()}
               </Button>
             </Grid>
           </Grid>
