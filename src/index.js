@@ -19,7 +19,7 @@ let tabsStore = new TabsStore();
 // Check which mode were in to know which component to render
 switch (params.get('mode')) {
   case CONFIG_MODE:
-    viewComponent = <AuthWrapper tabsStore={tabsStore}> <Config tabsStore={tabsStore} /> </AuthWrapper>;
+    viewComponent = <AuthWrapper tabsStore={tabsStore} ignoreBroadcasts={true} > <Config tabsStore={tabsStore} /> </AuthWrapper>;
     break;
   case VIEWER_MODE:
     viewComponent = <AuthWrapper tabsStore={tabsStore}> <BetterInformationPanel tabsStore={tabsStore} /> </AuthWrapper>;

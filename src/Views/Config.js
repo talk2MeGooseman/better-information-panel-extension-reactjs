@@ -32,6 +32,7 @@ const styles = theme => ({
     flex: 1,
   },
   rootPaper: {
+    height: '900px',
   },
   paper: {
     textAlign: 'left',

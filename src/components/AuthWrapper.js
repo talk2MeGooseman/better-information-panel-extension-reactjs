@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 
@@ -24,17 +24,25 @@ const styles = theme => ({
 });
 
 @observer
-class AuthWrapper extends PureComponent {
+class AuthWrapper extends Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
+    ignoreBroadcasts: PropTypes.bool,
   };
 
   componentDidMount() {
+    // Listen to on Auth callback to get token
     window.Twitch.ext.onAuthorized((auth) => {
       this.props.tabsStore.token = auth.token;
 
       this.props.tabsStore.fetchTabs();
     });
+
+    if (!this.props.ignoreBroadcasts) {
+      window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
+        this.props.tabsStore.fetchTabs();
+      });
+    }
   }
 
   renderLoading() {

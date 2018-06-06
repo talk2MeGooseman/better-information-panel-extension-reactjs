@@ -4,3 +4,7 @@
 .react-mde-content {
   max-height: 440px;
 }
+.CodeMirror {
+  height: 350px !important;
+  overflow-y: auto !important;
+}

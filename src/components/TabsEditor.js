@@ -65,7 +65,8 @@ class TabsEditor extends React.Component {
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth
+            scrollable
+            scrollButtons="on"
           >
             {this.renderTabs()}
           </Tabs>

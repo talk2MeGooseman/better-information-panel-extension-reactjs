@@ -1,10 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
-import 'react-mde/lib/styles/css/react-mde-all.css';
-import '../Config.css';
-import ReactMde from "react-mde";
-import {EditorState, ContentState} from "draft-js";
+import React from "react";
+import PropTypes from "prop-types";
+import { observer } from "mobx-react";
+
+
+import SimpleMDE from "react-simplemde-editor";
+import "../Config.css";
+import "simplemde/dist/simplemde.min.css";
 
 @observer
 export default class Editor extends React.Component {
@@ -13,41 +14,81 @@ export default class Editor extends React.Component {
     tabsStore: PropTypes.object.isRequired,
   };
 
-  state = {
-    mdeState: null,
+  componentDidMount() {
+    this.handleChange(this.props.tab.body);
+  }
+
+  handleChange = value => {
+    this.props.tab.body = value;
   };
 
-  createMdeState(tabData) {
-    let editorState = {
-      html: "",
-      markdown: tabData.body,
-      draftEditorState: EditorState.createWithContent(ContentState.createFromText(tabData.body))
+  _toggleLine(cm, name) {
+    var startPoint = cm.getCursor("start");
+    var endPoint = cm.getCursor("end");
+
+    var map = {
+      "check-list": "- [] ",
     };
-    console.log(editorState)
-    return editorState;
-  }
+    for (var i = startPoint.line; i <= endPoint.line; i++) {
+      (function(i) {
+        var text = cm.getLine(i);
 
-  componentDidMount() {
-    let mdeState = this.createMdeState(this.props.tab);
+        text = map[name] + text;
 
-    this.handleValueChange(mdeState);
-  }
-
-  handleValueChange = (newMdeState) => {
-    this.setState({
-      mdeState: newMdeState,
-    });
-
-    this.props.tabsStore.saveState = '';
-    this.props.tab.body = newMdeState.markdown;
+        cm.replaceRange(
+          text,
+          {
+            line: i,
+            ch: 0,
+          },
+          {
+            line: i,
+            ch: 99999999999999,
+          }
+        );
+      })(i);
+    }
+    cm.focus();
   }
 
   render() {
-    return(
-      <ReactMde
-        style={{ maxHeight: '450px'}}
-        onChange={this.handleValueChange}
-        editorState={this.state.mdeState}
+    return (
+      <SimpleMDE
+        onChange={this.handleChange}
+        value={this.props.tab.body}
+        options={{
+          spellChecker: true,
+          status: false,
+          hideIcons: ["preview", "side-by-side", "fullscreen"],
+          insertTexts: {
+            toggleUnorderedList: ["* ", ""],
+          },
+          toolbar: [
+            "heading-1",
+            "heading-2",
+            "heading-3",
+            "bold",
+            "italic",
+            "strikethrough",
+            "code",
+            "quote",
+            "unordered-list",
+            "ordered-list",
+            "link",
+            "image",
+            "table",
+            "horizontal-rule",
+            {
+              name: "check-list",
+              action: (editor) => {
+                var cm = editor.codemirror;
+                this._toggleLine(cm, "check-list");
+              },
+              className: "fa fa-check",
+              title: "Check List",
+            },
+          ],
+        }}
       />
     );
   }

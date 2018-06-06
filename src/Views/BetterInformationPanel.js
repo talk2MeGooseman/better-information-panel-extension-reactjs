@@ -116,7 +116,8 @@ class BetterInformationPanel extends Component {
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth
+            scrollable
+            scrollButtons="on"
           >
             {this.renderTabs()}
           </Tabs>
