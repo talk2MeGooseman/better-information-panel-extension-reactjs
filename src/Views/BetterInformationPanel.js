@@ -20,7 +20,7 @@ const styles = theme => ({
     minWidth: theme.spacing.unit * 8,
   },
   tabBody: {
-    height: '431px',
+    height: '85vh',
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
   }
