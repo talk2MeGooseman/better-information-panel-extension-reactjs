@@ -1,5 +1,6 @@
 export const CONFIG_MODE = 'config';
 export const VIEWER_MODE = 'viewer';
+export const DASHBOARD_MODE = 'dashboard';
 
 export const LOAD_DONE = 'done';
 export const LOAD_ERROR = 'error';

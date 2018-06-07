@@ -25,6 +25,7 @@ class TabsEditor extends React.Component {
     tabsStore: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
+    allowPreview: PropTypes.bool,
   };
 
   state = {
@@ -47,10 +48,10 @@ class TabsEditor extends React.Component {
   }
 
   renderEditor() {
-    let { tabsStore } = this.props;
+    let { tabsStore, allowPreview } = this.props;
 
     return tabsStore.tabs.map((tab) => (
-      <Editor key={tab.id} tab={tab} tabsStore={tabsStore} />
+      <Editor key={tab.id} tab={tab} tabsStore={tabsStore} allowPreview={allowPreview} />
     ));
   }
 

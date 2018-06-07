@@ -5,9 +5,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 import Config from './Views/Config';
 import AuthWrapper from './components/AuthWrapper'
-import {CONFIG_MODE, VIEWER_MODE} from './services/constants'
+import {CONFIG_MODE, VIEWER_MODE, DASHBOARD_MODE} from './services/constants'
 import TabsStore from './mobx/state/TabsStore';
 import BetterInformationPanel from './Views/BetterInformationPanel';
+import Dashboard from './Views/Dashboard';
 
 // Get the params from the url
 const params = new URLSearchParams(window.location.search)
@@ -23,6 +24,9 @@ switch (params.get('mode')) {
     break;
   case VIEWER_MODE:
     viewComponent = <AuthWrapper tabsStore={tabsStore}> <BetterInformationPanel tabsStore={tabsStore} /> </AuthWrapper>;
+    break;
+  case DASHBOARD_MODE:
+    viewComponent = <AuthWrapper tabsStore={tabsStore} ignoreBroadcasts={true}> <Dashboard tabsStore={tabsStore} /> </AuthWrapper>;
     break;
   default:
     viewComponent = <div>Nothing Loaded</div>;
