@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import { COMPONENT_ANCHOR } from "../services/constants";
+
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+
 import * as Showdown from "showdown";
 import ReactHtmlParser from 'react-html-parser';
 
@@ -18,6 +24,11 @@ const styles = theme => ({
   },
   tabRoot: {
     minWidth: theme.spacing.unit * 8,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 3,
   },
   tabBody: {
     height: '85vh',
@@ -42,10 +53,12 @@ const SHOWDOWN_CONFIG = {
 class BetterInformationPanel extends Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
+    viewAnchor: PropTypes.string,
   };
 
   state = {
     value: 0,
+    hidden: false,
   };
 
   constructor(props) {
@@ -69,6 +82,14 @@ class BetterInformationPanel extends Component {
     this.setState({ value: index });
   };
 
+  handleToggleShow = () => {
+    let hidden = this.state.hidden;
+
+    this.setState({
+      hidden: !hidden, 
+    });
+  }
+
   renderTabs() {
     let { classes, tabsStore } = this.props;
     return tabsStore.tabs.map((tab) => {
@@ -78,11 +99,16 @@ class BetterInformationPanel extends Component {
 
   renderTabBody() {
     const { tabsStore, classes} = this.props;
+    
     return tabsStore.tabs.map((tab) => {
       let styles = {
         color: tab.textColor,
         background: tab.bgColor,
       };
+
+      if (tabsStore.videoOverlayHeight) {
+        styles['height'] = tabsStore.videoOverlayHeight;
+      }
 
       return (
         <div key={tab.id} style={styles} className={classes.tabBody}>
@@ -92,9 +118,28 @@ class BetterInformationPanel extends Component {
     });
   }
 
+  renderToggleShowButton() {
+    const { classes, viewAnchor } = this.props;
+    let icon = <VisibilityIcon />;
+
+    if (viewAnchor !== COMPONENT_ANCHOR) {
+      return;
+    }
+
+    if (this.state.hidden) {
+      icon = <VisibilityOffIcon />;
+    }
+
+    return (
+      <Button mini onClick={this.handleToggleShow} variant="fab" className={classes.fab} color="primary">
+        {icon}
+      </Button>
+    );
+  }
+
   render() {
     const { classes, theme, tabsStore } = this.props;
-    const { value } = this.state;
+    const { value, hidden } = this.state;
     const selectedTab = tabsStore.tabs[value];
     if (!selectedTab) {
       return null;
@@ -102,35 +147,38 @@ class BetterInformationPanel extends Component {
 
     const styles = {
       background: selectedTab.bgColor,
+      display: `${ hidden ? 'none' : '' }`
     }
 
     const slideStyles = {
-      maxHeight: '452px',
     }
 
     return(
-      <div className={classes.root} style={styles}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            scrollable
-            scrollButtons="on"
+      <React.Fragment>
+        <div className={classes.root} style={styles}>
+          <AppBar position="static" color="default">
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              scrollable
+              scrollButtons="on"
+            >
+              {this.renderTabs()}
+            </Tabs>
+          </AppBar>
+          <SwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={this.state.value}
+            onChangeIndex={this.handleChangeIndex}
+            slideStyle={slideStyles}
           >
-            {this.renderTabs()}
-          </Tabs>
-        </AppBar>
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
-          slideStyle={slideStyles}
-        >
-          {this.renderTabBody()}
-        </SwipeableViews>
-      </div>
+            {this.renderTabBody()}
+          </SwipeableViews>
+        </div>
+        {this.renderToggleShowButton()}
+      </React.Fragment>
     );
   }
 }

@@ -2,6 +2,10 @@ export const CONFIG_MODE = 'config';
 export const VIEWER_MODE = 'viewer';
 export const DASHBOARD_MODE = 'dashboard';
 
+export const COMPONENT_ANCHOR = 'component';
+export const PANEL_ANCHOR = 'panel';
+export const MOBILE_ANCHOR = 'mobile';
+
 export const LOAD_DONE = 'done';
 export const LOAD_ERROR = 'error';
 export const LOAD_PENDING = 'pending';
@@ -15,13 +19,12 @@ export const ACTIVE_STEP_2 = 1;
 export const ACTIVE_STEP_3 = 2;
 export const ACTIVE_STEP_4 = 3;
 
-export const DEFAULT_BODY_TEXT = `## Better Information Panel##
+export const DEFAULT_BODY_TEXT = `## Better Information Panel
 ## Features:
-- Mutiple tabs in one pane
-
-- Easy editing and previewing
-- Customize your text color and background color
-- Enable as a panel and video overlay
+* Multiple tabs in one panel
+* Easy editing and previewing
+* Customize your text color and background color
+* Enable as a panel and video overlay
 
 **Steps to success:**
 - [x] Install the extension
