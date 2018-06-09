@@ -98,11 +98,14 @@ class BetterInformationPanel extends Component {
         styles['height'] = tabsStore.videoOverlayHeight;
       }
 
-      return (
-        <div key={tab.id} style={styles} className={classes.tabBody}>
-          {ReactHtmlParser(this.converter.makeHtml(tab.body))}
-        </div>
-      );
+      return <div key={tab.id} style={styles} className={classes.tabBody}>
+          {ReactHtmlParser(this.converter.makeHtml(tab.body), {
+            transform: (node) => {
+            if (node.type === 'tag' && node.name === 'a') {
+              return <p>Sorry links not allowed</p>;
+            }
+          }})},
+        </div>;
     });
   }
 

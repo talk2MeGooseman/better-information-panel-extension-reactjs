@@ -21,7 +21,7 @@ export const ACTIVE_STEP_4 = 3;
 
 export const SHOWDOWN_CONFIG = {
   tables: true,
-  simplifiedAutoLink: true,
+  simplifiedAutoLink: false,
   strikethrough: true,
   tasklists: true,
   parseImgDimensions: true,
@@ -31,8 +31,7 @@ export const SHOWDOWN_CONFIG = {
   simpleLineBreaks: true,
 };
 
-export const DEFAULT_BODY_TEXT = `## Better Information Panel
-## Features:
+export const DEFAULT_BODY_TEXT = `## Features:
 * Multiple tabs in one panel
 * Easy editing and previewing
 * Customize your text color and background color
@@ -40,9 +39,6 @@ export const DEFAULT_BODY_TEXT = `## Better Information Panel
 
 **Steps to success:**
 - [x] Install the extension
-
-- [x]  Enable is as _Panel_ or _Video Overlay_
-
+- [x] Enable is as _Panel_ or _Video Overlay_
 - [ ] Enter your text
-
 - [ ] Give your viewers all the information they need`;
