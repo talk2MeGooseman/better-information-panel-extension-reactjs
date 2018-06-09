@@ -19,6 +19,18 @@ export const ACTIVE_STEP_2 = 1;
 export const ACTIVE_STEP_3 = 2;
 export const ACTIVE_STEP_4 = 3;
 
+export const SHOWDOWN_CONFIG = {
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true,
+  parseImgDimensions: true,
+  smoothLivePreview: true,
+  openLinksInNewWindow: true,
+  emoji: true,
+  simpleLineBreaks: true,
+};
+
 export const DEFAULT_BODY_TEXT = `## Better Information Panel
 ## Features:
 * Multiple tabs in one panel

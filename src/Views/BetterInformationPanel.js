@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import { COMPONENT_ANCHOR } from "../services/constants";
+import { COMPONENT_ANCHOR, SHOWDOWN_CONFIG } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
@@ -36,18 +36,6 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit,
   }
 });
-
-const SHOWDOWN_CONFIG = {
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-  parseImgDimensions: true,
-  smoothLivePreview: true,
-  openLinksInNewWindow: true,
-  emoji: true,
-  simpleLineBreaks: true,
-};
 
 @observer
 class BetterInformationPanel extends Component {

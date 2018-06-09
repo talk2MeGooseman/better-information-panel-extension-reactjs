@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react";
 import styled from "styled-components";
+import * as Showdown from "showdown";
+import { SHOWDOWN_CONFIG } from "../services/constants";
 
 import SimpleMDE from "react-simplemde-editor";
 import "simplemde/dist/simplemde.min.css";
@@ -32,6 +34,7 @@ export default class Editor extends React.Component {
 
   componentDidMount() {
     this.handleChange(this.props.tab.body);
+    this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
   }
 
   handleChange = value => {
@@ -105,12 +108,16 @@ export default class Editor extends React.Component {
           onChange={this.handleChange}
           value={this.props.tab.body}
           options={{
+            autoDownloadFontAwesome: false,
             spellChecker: true,
             status: false,
             insertTexts: {
               toggleUnorderedList: ["* ", ""],
             },
             toolbar: toolbar,
+            previewRender: (plainText) => {
+              return this.converter.makeHtml(plainText); // Returns HTML from a custom parser
+            },
           }}
         />
       </Wrapper>

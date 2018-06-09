@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import '../App.css';
 import '../Config.css'
-import 'typeface-roboto'
 import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';

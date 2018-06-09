@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const EBS_ROOT_URL = 'https://us-central1-projects-twitch-extension.cloudfunctions.net';
-const EBS_ROOT_URL = 'https://localhost:8080/info-extension/us-central1';
+const EBS_ROOT_URL = 'https://us-central1-info-extension.cloudfunctions.net';
+// const EBS_ROOT_URL = 'https://localhost:8080/info-extension/us-central1';
 
 /**
  * getBoardcasterGithubInfo
@@ -13,7 +13,7 @@ const EBS_ROOT_URL = 'https://localhost:8080/info-extension/us-central1';
 export const getPanelInformation = async (token) => {
   let response = await axios({
     method: 'GET',
-    url: `${EBS_ROOT_URL}/panel_information`,
+    url: `${EBS_ROOT_URL}/get_panel_information`,
     headers: {
       'Content-Type': 'application/json',
       'x-extension-jwt': token,
@@ -36,7 +36,7 @@ export const setPanelInformation = async (token, tabs) => {
   try {
     response = await axios({
       method: 'POST',
-      url: `${EBS_ROOT_URL}/panel_information`,
+      url: `${EBS_ROOT_URL}/set_panel_information`,
       data: {
         tabs
       },
