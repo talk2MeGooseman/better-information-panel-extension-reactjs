@@ -19,7 +19,6 @@ let TOOLBAR_FEATURES = [
   "quote",
   "unordered-list",
   "ordered-list",
-  "link",
   "image",
   "table",
   "horizontal-rule",

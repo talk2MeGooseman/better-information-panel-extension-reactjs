@@ -42,6 +42,7 @@ class BetterInformationPanel extends Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
     viewAnchor: PropTypes.string,
+    configPreview: PropTypes.bool,
   };
 
   state = {
@@ -78,6 +79,17 @@ class BetterInformationPanel extends Component {
     });
   }
 
+  toHTML(markdown) {
+    return ReactHtmlParser(this.converter.makeHtml(markdown), {
+      transform: (node) => {
+        if (node.type === 'tag' && node.name === 'a')
+        {
+          return <p>Sorry links not allowed</p>;
+        }
+      }
+    })
+  }
+
   renderTabs() {
     let { classes, tabsStore } = this.props;
     return tabsStore.tabs.map((tab) => {
@@ -86,7 +98,7 @@ class BetterInformationPanel extends Component {
   }
 
   renderTabBody() {
-    const { tabsStore, classes} = this.props;
+    const { tabsStore, classes, configPreview } = this.props;
     
     return tabsStore.tabs.map((tab) => {
       let styles = {
@@ -96,16 +108,15 @@ class BetterInformationPanel extends Component {
 
       if (tabsStore.videoOverlayHeight) {
         styles['height'] = tabsStore.videoOverlayHeight;
+      } else if (configPreview) {
+        styles['height'] = '435px';
       }
 
-      return <div key={tab.id} style={styles} className={classes.tabBody}>
-          {ReactHtmlParser(this.converter.makeHtml(tab.body), {
-            transform: (node) => {
-            if (node.type === 'tag' && node.name === 'a') {
-              return <p>Sorry links not allowed</p>;
-            }
-          }})},
-        </div>;
+      return (
+        <div key={tab.id} style={styles} className={classes.tabBody}>
+          {this.toHTML(tab.body)}
+        </div>
+      );
     });
   }
 

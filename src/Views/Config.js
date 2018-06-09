@@ -31,12 +31,13 @@ const styles = theme => ({
   },
   rootPaper: {
     height: '900px',
+    background: theme.palette.background.default
   },
   paper: {
     textAlign: 'left',
   },
   panelPreviewPaper: {
-    width: '320px',
+    width: '327px',
     height: '502px',
     overflowX: 'hidden',
   },
@@ -127,7 +128,7 @@ class ConfigView extends Component {
                 Preview
               </Typography>
               <Paper className={classes.panelPreviewPaper}>
-                <BetterInformationPanel tabsStore={tabsStore} />
+                <BetterInformationPanel configPreview={true} tabsStore={tabsStore} />
               </Paper>
             </Grid>
 
