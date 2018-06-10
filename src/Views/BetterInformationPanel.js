@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import { COMPONENT_ANCHOR, SHOWDOWN_CONFIG } from "../services/constants";
+import { COMPONENT_ANCHOR, SHOWDOWN_CONFIG, TABS_HEIGHT, CONFIG_PREVIEW_HEIGHT } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
@@ -31,7 +31,6 @@ const styles = theme => ({
     right: theme.spacing.unit * 3,
   },
   tabBody: {
-    height: '85vh',
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
   }
@@ -57,10 +56,6 @@ class BetterInformationPanel extends Component {
 
   componentDidMount() {
     const { tabsStore } = this.props;
-
-    if (tabsStore.tabCount === 0) {
-      tabsStore.addTab();
-    }
   }
 
   handleChange = (event, value) => {
@@ -109,7 +104,10 @@ class BetterInformationPanel extends Component {
       if (tabsStore.videoOverlayHeight) {
         styles['height'] = tabsStore.videoOverlayHeight;
       } else if (configPreview) {
-        styles['height'] = '435px';
+        styles['height'] = CONFIG_PREVIEW_HEIGHT;
+      } else {
+        let totalHeight = window.innerHeight;
+        styles['height'] = totalHeight - TABS_HEIGHT;
       }
 
       return (
@@ -143,8 +141,9 @@ class BetterInformationPanel extends Component {
     const { classes, theme, tabsStore } = this.props;
     const { value, hidden } = this.state;
     const selectedTab = tabsStore.tabs[value];
+
     if (!selectedTab) {
-      return null;
+      return <p>Couldn't find configuration</p>;
     }
 
     const styles = {

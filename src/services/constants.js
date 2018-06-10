@@ -19,6 +19,9 @@ export const ACTIVE_STEP_2 = 1;
 export const ACTIVE_STEP_3 = 2;
 export const ACTIVE_STEP_4 = 3;
 
+export const TABS_HEIGHT = 85;
+export const CONFIG_PREVIEW_HEIGHT = 415;
+
 export const SHOWDOWN_CONFIG = {
   tables: true,
   simplifiedAutoLink: false,

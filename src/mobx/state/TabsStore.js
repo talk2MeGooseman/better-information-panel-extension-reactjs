@@ -55,13 +55,13 @@ export default class TabsStore {
       action("fetchSuccess", result => {
         this.loadingState = "done"
         if (!result.tabs) {
+          this.addTab();
           return;
         }
         this.activeStep = ACTIVE_STEP_4;
         this.tabs = result.tabs.map((tab) => {
           return TabModel.fromJS(this, tab);
         })
-
       }),
       // inline created action
       action("fetchError", error => {
