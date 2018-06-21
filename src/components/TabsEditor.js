@@ -21,7 +21,7 @@ const styles = theme => ({
 @observer
 class TabsEditor extends React.Component {
 
-  propTypes = {
+  static propTypes = {
     tabsStore: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,

@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabsEditor match snapshot in default state 1`] = `
+<div
+  className="TabsEditor-root-1"
+>
+  <WithStyles(AppBar)
+    color="default"
+    position="static"
+  >
+    <WithStyles(Tabs)
+      indicatorColor="primary"
+      onChange={[Function]}
+      scrollButtons="on"
+      scrollable={true}
+      textColor="primary"
+      value={0}
+    >
+      <WithStyles(Tab)
+        classes={
+          Object {
+            "root": "TabsEditor-tabRoot-2",
+          }
+        }
+        key="1"
+        label="Add Title"
+      />
+    </WithStyles(Tabs)>
+  </WithStyles(AppBar)>
+  <ReactSwipableView
+    animateHeight={false}
+    animateTransitions={true}
+    axis="x"
+    disableLazyLoading={false}
+    disabled={false}
+    enableMouseEvents={false}
+    hysteresis={0.6}
+    ignoreNativeScroll={false}
+    index={0}
+    onChangeIndex={[Function]}
+    resistance={false}
+    springConfig={
+      Object {
+        "delay": "0s",
+        "duration": "0.35s",
+        "easeFunction": "cubic-bezier(0.15, 0.3, 0.25, 1)",
+      }
+    }
+    threshold={5}
+  >
+    <Editor
+      key="1"
+      tab={
+        TabModel {
+          "bgColor": "#ffffff",
+          "body": "## Features:
+        * Multiple tabs in one panel
+        * Easy editing and previewing
+        * Customize your text color and background color
+        * Enable as a panel and video overlay
+        
+        **Steps to success:**
+        - [x] Install the extension
+        - [x] Enable is as _Panel_ or _Video Overlay_
+        - [ ] Enter your text
+        - [ ] Give your viewers all the information they need",
+          "id": "1",
+          "store": TabsStore {
+            "activeStep": 1,
+            "loadingState": "pending",
+            "saveState": "",
+            "tabs": Array [
+              [Circular],
+            ],
+            "token": undefined,
+            "videoOverlayHeight": undefined,
+          },
+          "textColor": "#000000",
+          "title": "Add Title",
+        }
+      }
+      tabsStore={
+        TabsStore {
+          "activeStep": 1,
+          "loadingState": "pending",
+          "saveState": "",
+          "tabs": Array [
+            TabModel {
+              "bgColor": "#ffffff",
+              "body": "## Features:
+        * Multiple tabs in one panel
+        * Easy editing and previewing
+        * Customize your text color and background color
+        * Enable as a panel and video overlay
+        
+        **Steps to success:**
+        - [x] Install the extension
+        - [x] Enable is as _Panel_ or _Video Overlay_
+        - [ ] Enter your text
+        - [ ] Give your viewers all the information they need",
+              "id": "1",
+              "store": [Circular],
+              "textColor": "#000000",
+              "title": "Add Title",
+            },
+          ],
+          "token": undefined,
+          "videoOverlayHeight": undefined,
+        }
+      }
+    />
+  </ReactSwipableView>
+</div>
+`;

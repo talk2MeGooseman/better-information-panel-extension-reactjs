@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPicker displays prop color swatch #ffffff 1`] = `
+<ColorPicker
+  color="#ffffff"
+  handleChange={[Function]}
+>
+  <div>
+    <div
+      className="color-swatch"
+      onClick={[Function]}
+      style={
+        Object {
+          "MozBorderRadius": "1px",
+          "MozBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "OBorderRadius": "1px",
+          "OBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "WebkitBorderRadius": "1px",
+          "WebkitBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "background": "#fff",
+          "borderRadius": "1px",
+          "boxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "msBorderRadius": "1px",
+          "msBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "padding": "5px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "MozBorderRadius": "2px",
+            "OBorderRadius": "2px",
+            "WebkitBorderRadius": "2px",
+            "background": "#ffffff",
+            "borderRadius": "2px",
+            "height": "14px",
+            "msBorderRadius": "2px",
+            "width": "36px",
+          }
+        }
+      />
+    </div>
+  </div>
+</ColorPicker>
+`;
+
+exports[`ColorPicker matches default state snapshot 1`] = `
+<ColorPicker
+  color="#000000"
+  handleChange={[Function]}
+>
+  <div>
+    <div
+      className="color-swatch"
+      onClick={[Function]}
+      style={
+        Object {
+          "MozBorderRadius": "1px",
+          "MozBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "OBorderRadius": "1px",
+          "OBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "WebkitBorderRadius": "1px",
+          "WebkitBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "background": "#fff",
+          "borderRadius": "1px",
+          "boxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "cursor": "pointer",
+          "display": "inline-block",
+          "msBorderRadius": "1px",
+          "msBoxShadow": "0 0 0 1px rgba(0,0,0,.1)",
+          "padding": "5px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "MozBorderRadius": "2px",
+            "OBorderRadius": "2px",
+            "WebkitBorderRadius": "2px",
+            "background": "#000000",
+            "borderRadius": "2px",
+            "height": "14px",
+            "msBorderRadius": "2px",
+            "width": "36px",
+          }
+        }
+      />
+    </div>
+  </div>
+</ColorPicker>
+`;

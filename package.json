@@ -67,6 +67,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
     ],
@@ -77,6 +78,7 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
@@ -113,6 +115,10 @@
   },
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "jest-enzyme": "^6.0.1",
     "mobx-react-devtools": "^5.0.1"
   }
 }

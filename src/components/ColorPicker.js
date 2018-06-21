@@ -8,7 +8,7 @@ class ColorPicker extends React.Component {
     color: '#000000',
   };
 
-  propTypes = {
+  static propTypes = {
     handleChange: PropTypes.func.isRequired,
   };
 
@@ -59,14 +59,13 @@ class ColorPicker extends React.Component {
 
     return (
       <div>
-        <div style={ styles.swatch } onClick={ this.handleClick }>
+        <div className="color-swatch" style={ styles.swatch } onClick={ this.handleClick }>
           <div style={ styles.color } />
         </div>
-        { this.state.displayColorPicker ? <div style={ styles.popover }>
-          <div style={ styles.cover } onClick={ this.handleClose }/>
+        { this.state.displayColorPicker ? <div className="popover" style={ styles.popover }>
+          <div className="closePopover" style={ styles.cover } onClick={ this.handleClose }/>
           <ChromePicker color={ this.props.color } disableAlpha={true} onChange={ this.props.handleChange } />
         </div> : null }
-
       </div>
     )
   }

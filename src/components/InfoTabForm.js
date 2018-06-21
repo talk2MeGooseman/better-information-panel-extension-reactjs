@@ -28,12 +28,6 @@ const styles = theme => ({
 
 @observer
 class InfoTabForm extends React.Component {
-  handleChange = event => {
-    if (!event || !event.target) {
-      return;
-    }
-    this.setState({ name: event.target.value });
-  };
 
   handleAddTab = () => {
     let { tabsStore } = this.props
@@ -48,9 +42,7 @@ class InfoTabForm extends React.Component {
 
     return tabsStore.tabs.map((tabData) => {
       return (
-        <React.Fragment>
-          <TabSectionInfoInputGroup key={tabData.id} tabsStore={tabsStore} index={count++} tabData={tabData} />
-        </React.Fragment>
+        <TabSectionInfoInputGroup key={tabData.id} tabsStore={tabsStore} index={count++} tabData={tabData} />
       );
     });
   }

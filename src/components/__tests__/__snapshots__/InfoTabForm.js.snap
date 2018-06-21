@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoTabForm matches default state snapshot 1`] = `
+<WithStyles(InfoTabForm)
+  tabsStore={
+    TabsStore {
+      "activeStep": 0,
+      "loadingState": "pending",
+      "saveState": "",
+      "tabs": ObservableArray [],
+      "token": undefined,
+      "videoOverlayHeight": undefined,
+    }
+  }
+>
+  <InfoTabForm
+    classes={
+      Object {
+        "button": "InfoTabForm-button-3",
+        "container": "InfoTabForm-container-1",
+        "formControl": "InfoTabForm-formControl-2",
+      }
+    }
+    tabsStore={
+      TabsStore {
+        "activeStep": 0,
+        "loadingState": "pending",
+        "saveState": "",
+        "tabs": ObservableArray [],
+        "token": undefined,
+        "videoOverlayHeight": undefined,
+      }
+    }
+  >
+    <div
+      className="InfoTabForm-container-1"
+    >
+      <WithStyles(FormControl)>
+        <FormControl
+          classes={
+            Object {
+              "fullWidth": "MuiFormControl-fullWidth-7",
+              "marginDense": "MuiFormControl-marginDense-6",
+              "marginNormal": "MuiFormControl-marginNormal-5",
+              "root": "MuiFormControl-root-4",
+            }
+          }
+          component="div"
+          disabled={false}
+          error={false}
+          fullWidth={false}
+          margin="none"
+          required={false}
+        >
+          <div
+            className="MuiFormControl-root-4"
+            onBlur={[Function]}
+            onFocus={[Function]}
+          >
+            <WithStyles(Button)
+              aria-label="add"
+              className="InfoTabForm-button-3"
+              color="primary"
+              disabled={false}
+              onClick={[Function]}
+              variant="fab"
+            >
+              <Button
+                aria-label="add"
+                className="InfoTabForm-button-3"
+                classes={
+                  Object {
+                    "colorInherit": "MuiButton-colorInherit-13",
+                    "disabled": "MuiButton-disabled-18",
+                    "fab": "MuiButton-fab-19",
+                    "flatPrimary": "MuiButton-flatPrimary-10",
+                    "flatSecondary": "MuiButton-flatSecondary-11",
+                    "focusVisible": "MuiButton-focusVisible-17",
+                    "fullWidth": "MuiButton-fullWidth-23",
+                    "label": "MuiButton-label-9",
+                    "mini": "MuiButton-mini-20",
+                    "outlined": "MuiButton-outlined-12",
+                    "raised": "MuiButton-raised-14",
+                    "raisedPrimary": "MuiButton-raisedPrimary-15",
+                    "raisedSecondary": "MuiButton-raisedSecondary-16",
+                    "root": "MuiButton-root-8",
+                    "sizeLarge": "MuiButton-sizeLarge-22",
+                    "sizeSmall": "MuiButton-sizeSmall-21",
+                  }
+                }
+                color="primary"
+                disableFocusRipple={false}
+                disabled={false}
+                fullWidth={false}
+                mini={false}
+                onClick={[Function]}
+                size="medium"
+                type="button"
+                variant="fab"
+              >
+                <WithStyles(ButtonBase)
+                  aria-label="add"
+                  className="MuiButton-root-8 MuiButton-raised-14 MuiButton-fab-19 MuiButton-raisedPrimary-15 InfoTabForm-button-3"
+                  disabled={false}
+                  focusRipple={true}
+                  focusVisibleClassName="MuiButton-focusVisible-17"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <ButtonBase
+                    aria-label="add"
+                    centerRipple={false}
+                    className="MuiButton-root-8 MuiButton-raised-14 MuiButton-fab-19 MuiButton-raisedPrimary-15 InfoTabForm-button-3"
+                    classes={
+                      Object {
+                        "disabled": "MuiButtonBase-disabled-25",
+                        "focusVisible": "MuiButtonBase-focusVisible-26",
+                        "root": "MuiButtonBase-root-24",
+                      }
+                    }
+                    disableRipple={false}
+                    disabled={false}
+                    focusRipple={true}
+                    focusVisibleClassName="MuiButton-focusVisible-17"
+                    onClick={[Function]}
+                    tabIndex="0"
+                    type="button"
+                  >
+                    <button
+                      aria-label="add"
+                      className="MuiButtonBase-root-24 MuiButton-root-8 MuiButton-raised-14 MuiButton-fab-19 MuiButton-raisedPrimary-15 InfoTabForm-button-3"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      onKeyUp={[Function]}
+                      onMouseDown={[Function]}
+                      onMouseLeave={[Function]}
+                      onMouseUp={[Function]}
+                      onTouchEnd={[Function]}
+                      onTouchMove={[Function]}
+                      onTouchStart={[Function]}
+                      tabIndex="0"
+                      type="button"
+                    >
+                      <span
+                        className="MuiButton-label-9"
+                      >
+                        <pure(Add)>
+                          <Add>
+                            <WithStyles(SvgIcon)>
+                              <SvgIcon
+                                classes={
+                                  Object {
+                                    "colorAction": "MuiSvgIcon-colorAction-30",
+                                    "colorDisabled": "MuiSvgIcon-colorDisabled-32",
+                                    "colorError": "MuiSvgIcon-colorError-31",
+                                    "colorPrimary": "MuiSvgIcon-colorPrimary-28",
+                                    "colorSecondary": "MuiSvgIcon-colorSecondary-29",
+                                    "root": "MuiSvgIcon-root-27",
+                                  }
+                                }
+                                color="inherit"
+                                viewBox="0 0 24 24"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  className="MuiSvgIcon-root-27"
+                                  focusable="false"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <g>
+                                    <path
+                                      d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                                    />
+                                  </g>
+                                </svg>
+                              </SvgIcon>
+                            </WithStyles(SvgIcon)>
+                          </Add>
+                        </pure(Add)>
+                      </span>
+                      <WithStyles(TouchRipple)
+                        center={false}
+                        innerRef={[Function]}
+                      >
+                        <TouchRipple
+                          center={false}
+                          classes={
+                            Object {
+                              "child": "MuiTouchRipple-child-37",
+                              "childLeaving": "MuiTouchRipple-childLeaving-38",
+                              "childPulsate": "MuiTouchRipple-childPulsate-39",
+                              "ripple": "MuiTouchRipple-ripple-34",
+                              "ripplePulsate": "MuiTouchRipple-ripplePulsate-36",
+                              "rippleVisible": "MuiTouchRipple-rippleVisible-35",
+                              "root": "MuiTouchRipple-root-33",
+                            }
+                          }
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            className="MuiTouchRipple-root-33"
+                            component="span"
+                            enter={true}
+                            exit={true}
+                          >
+                            <span
+                              className="MuiTouchRipple-root-33"
+                            />
+                          </TransitionGroup>
+                        </TouchRipple>
+                      </WithStyles(TouchRipple)>
+                    </button>
+                  </ButtonBase>
+                </WithStyles(ButtonBase)>
+              </Button>
+            </WithStyles(Button)>
+          </div>
+        </FormControl>
+      </WithStyles(FormControl)>
+    </div>
+  </InfoTabForm>
+</WithStyles(InfoTabForm)>
+`;

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabSectionInfoInputGroup matches default state snapshot 1`] = `
+<WithStyles(Card)
+  className="_class-card-2"
+>
+  <WithStyles(CardHeader)
+    action={null}
+    title="Tab 1"
+  />
+  <WithStyles(CardContent)
+    className="_class-cardContent-3"
+  >
+    <WithStyles(FormGroup)
+      className="_class-inputField-1"
+    >
+      <TextField
+        id="title-1"
+        label="Tab Title"
+        onChange={[Function]}
+        required={false}
+        select={false}
+        value="Add Title"
+      />
+    </WithStyles(FormGroup)>
+    <WithStyles(FormGroup)
+      className="_class-inputField-1"
+    >
+      <WithStyles(Typography)
+        variant="caption"
+      >
+        Text Color
+      </WithStyles(Typography)>
+      <ColorPicker
+        color="#000000"
+        handleChange={[Function]}
+      />
+    </WithStyles(FormGroup)>
+    <WithStyles(FormGroup)
+      className="_class-inputField-1"
+    >
+      <WithStyles(Typography)
+        variant="caption"
+      >
+        Background Color
+      </WithStyles(Typography)>
+      <ColorPicker
+        color="#ffffff"
+        handleChange={[Function]}
+      />
+    </WithStyles(FormGroup)>
+  </WithStyles(CardContent)>
+</WithStyles(Card)>
+`;

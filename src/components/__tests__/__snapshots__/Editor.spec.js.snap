@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Editor matches default state snapshot 1`] = `
+<div
+  className="sc-bdVaJa lcwGZi"
+>
+  <SimpleMDEEditor
+    onChange={[Function]}
+    options={
+      Object {
+        "autoDownloadFontAwesome": false,
+        "insertTexts": Object {
+          "toggleUnorderedList": Array [
+            "* ",
+            "",
+          ],
+        },
+        "previewRender": [Function],
+        "spellChecker": true,
+        "status": false,
+        "toolbar": Array [
+          "heading-1",
+          "heading-2",
+          "heading-3",
+          "bold",
+          "italic",
+          "strikethrough",
+          "code",
+          "quote",
+          "unordered-list",
+          "ordered-list",
+          "image",
+          "table",
+          "horizontal-rule",
+          Object {
+            "action": [Function],
+            "className": "fa fa-check",
+            "name": "check-list",
+            "title": "Check List",
+          },
+        ],
+      }
+    }
+    value=""
+  />
+</div>
+`;
