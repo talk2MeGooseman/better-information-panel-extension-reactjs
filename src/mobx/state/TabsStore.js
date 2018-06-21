@@ -1,9 +1,7 @@
 import {
   observable,
   computed,
-  reaction,
   action,
-  autorun
 } from "mobx"
 import TabModel from "../model/TabModel";
 import { uuid } from "../../services/Utils";
@@ -26,6 +24,7 @@ export default class TabsStore {
   @observable loadingState = "pending";
   @observable activeStep = ACTIVE_STEP_1;
   @observable videoOverlayHeight;
+  @observable videoComponentVisibility = true;
 
   @computed get tabCount() {
     return this.tabs.length;
@@ -54,6 +53,27 @@ export default class TabsStore {
       // inline created action
       action("fetchSuccess", result => {
         this.loadingState = "done"
+        if (!result.tabs) {
+          this.addTab();
+          return;
+        }
+        this.activeStep = ACTIVE_STEP_4;
+        this.tabs = result.tabs.map((tab) => {
+          return TabModel.fromJS(this, tab);
+        })
+      }),
+      // inline created action
+      action("fetchError", error => {
+        this.loadingState = "error"
+      })
+    )
+  }
+
+  @action
+  updateTabs() {
+    getPanelInformation(this.token).then(
+      // inline created action
+      action("fetchSuccess", result => {
         if (!result.tabs) {
           this.addTab();
           return;

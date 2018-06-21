@@ -54,8 +54,12 @@ class BetterInformationPanel extends Component {
     this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
   }
 
-  componentDidMount() {
-    const { tabsStore } = this.props;
+  componentWillReact() {
+    let { tabsStore } = this.props;
+
+    if (this.state.value >= tabsStore.tabCount) {
+      this.setState({ value: tabsStore.tabCount - 1 });
+    }
   }
 
   handleChange = (event, value) => {
@@ -79,7 +83,11 @@ class BetterInformationPanel extends Component {
       transform: (node) => {
         if (node.type === 'tag' && node.name === 'a')
         {
-          return <p>Sorry links not allowed</p>;
+          return <p>Sorry links not allowed, Twitch Rules :(</p>;
+        }
+        if (node.type === 'script' && node.name === 'script')
+        {
+          return <p>No Scripts Tags Allowed!</p>;
         }
       }
     })
@@ -163,7 +171,7 @@ class BetterInformationPanel extends Component {
               onChange={this.handleChange}
               indicatorColor="primary"
               textColor="primary"
-              scrollable
+              scrollable={true}
               scrollButtons="on"
             >
               {this.renderTabs()}

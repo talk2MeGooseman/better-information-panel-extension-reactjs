@@ -31,16 +31,23 @@ class AuthWrapper extends Component {
   };
 
   componentDidMount() {
+    let shouldFetch = false;
     // Listen to on Auth callback to get token
     window.Twitch.ext.onAuthorized((auth) => {
+      // If token is null then that means this is the first load
+      if (!this.props.tabsStore.token) {
+        shouldFetch = true;
+      }
       this.props.tabsStore.token = auth.token;
 
-      this.props.tabsStore.fetchTabs();
+      if (shouldFetch) {
+        this.props.tabsStore.fetchTabs();
+      }
     });
 
     if (!this.props.ignoreBroadcasts) {
       window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
-        this.props.tabsStore.fetchTabs();
+        this.props.tabsStore.updateTabs();
       });
     }
   }

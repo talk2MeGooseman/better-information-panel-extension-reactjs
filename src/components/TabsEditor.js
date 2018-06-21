@@ -32,6 +32,14 @@ class TabsEditor extends React.Component {
     value: 0,
   };
 
+  componentWillReact() {
+    let { tabsStore } = this.props;
+
+    if (this.state.value >= tabsStore.tabCount  ) {
+      this.setState({ value: tabsStore.tabCount - 1 });
+    }
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };

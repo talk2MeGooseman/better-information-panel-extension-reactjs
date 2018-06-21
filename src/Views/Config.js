@@ -13,6 +13,10 @@ import Button from '@material-ui/core/Button';
 import Done from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
 import CachedIcon from '@material-ui/icons/Cached';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@material-ui/core/FormLabel';
+import Divider from '@material-ui/core/Divider';
 
 import * as Showdown from "showdown";
 import ProgressBar from '../components/ProgressBar';
@@ -77,6 +81,12 @@ class ConfigView extends Component {
     tabsStore.saveTabs();
   }
 
+  handleVisibilityChange = (event) => {
+    const { tabsStore } = this.props;
+    console.log(event);
+    tabsStore.videoComponentVisibility = event.target.checked;
+  }
+
   renderSaveState() {
     const { tabsStore, classes } = this.props;
     let jsx = null;
@@ -116,7 +126,7 @@ class ConfigView extends Component {
 
             <Grid item xs={4}>
               <Typography variant="headline" gutterBottom>
-                Enter Text
+                Enter Markdown Text - <a href="https://simplemde.com/markdown-guide" target="_blank">Help</a>
               </Typography>
               <section className={classes.editorSection}>
                 <TabsEditor tabsStore={tabsStore} />
@@ -132,7 +142,20 @@ class ConfigView extends Component {
               </Paper>
             </Grid>
 
-            <Grid item xs={1}>
+            <Grid item xs={2}>
+              <FormLabel component="legend">Video Component Setting:</FormLabel>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tabsStore.videoComponentVisibility}
+                    onChange={this.handleVisibilityChange}
+                    value="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Show by default"
+              />
+              <Divider />
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
                 Save
                 {this.renderSaveState()}

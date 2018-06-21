@@ -38,7 +38,9 @@ export const DEFAULT_BODY_TEXT = `## Features:
 * Multiple tabs in one panel
 * Easy editing and previewing
 * Customize your text color and background color
-* Enable as a panel and video overlay
+* Enable as a panel or video overlay
+* Add an image by putting in the URL to the image you want to display:
+![](https://imgur.com/ifSv0VG.png)
 
 **Steps to success:**
 - [x] Install the extension

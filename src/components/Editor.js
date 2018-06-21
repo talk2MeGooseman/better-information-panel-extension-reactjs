@@ -22,6 +22,7 @@ let TOOLBAR_FEATURES = [
   "image",
   "table",
   "horizontal-rule",
+  "guide",
 ];
 
 export default class Editor extends React.Component {
@@ -108,7 +109,7 @@ export default class Editor extends React.Component {
           value={this.props.tab.body}
           options={{
             autoDownloadFontAwesome: false,
-            spellChecker: true,
+            spellChecker: false,
             status: false,
             insertTexts: {
               toggleUnorderedList: ["* ", ""],
