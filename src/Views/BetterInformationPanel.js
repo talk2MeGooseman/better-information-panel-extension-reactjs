@@ -11,6 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import * as Showdown from "showdown";
 import ReactHtmlParser from 'react-html-parser';
@@ -101,7 +102,7 @@ class BetterInformationPanel extends Component {
   }
 
   renderTabBody() {
-    const { tabsStore, classes, configPreview } = this.props;
+    const { tabsStore, classes, configPreview, viewAnchor } = this.props;
     
     return tabsStore.tabs.map((tab) => {
       let styles = {
@@ -109,13 +110,13 @@ class BetterInformationPanel extends Component {
         background: tab.bgColor,
       };
 
-      if (tabsStore.videoOverlayHeight) {
+      if (viewAnchor === COMPONENT_ANCHOR) {
         styles['height'] = tabsStore.videoOverlayHeight;
       } else if (configPreview) {
         styles['height'] = CONFIG_PREVIEW_HEIGHT;
       } else {
         let totalHeight = window.innerHeight;
-        styles['height'] = totalHeight - TABS_HEIGHT;
+        styles['height'] = totalHeight - TABS_HEIGHT + 'px';
       }
 
       return (
@@ -129,6 +130,7 @@ class BetterInformationPanel extends Component {
   renderToggleShowButton() {
     const { classes, viewAnchor } = this.props;
     let icon = <VisibilityIcon />;
+    let tooltipText = "Hide";
 
     if (viewAnchor !== COMPONENT_ANCHOR) {
       return;
@@ -136,12 +138,15 @@ class BetterInformationPanel extends Component {
 
     if (this.state.hidden) {
       icon = <VisibilityOffIcon />;
+      tooltipText = "Show";
     }
 
     return (
-      <Button mini onClick={this.handleToggleShow} variant="fab" className={classes.fab} color="primary">
-        {icon}
-      </Button>
+      <Tooltip id="tooltip-top" title={tooltipText} placement="top">
+        <Button mini onClick={this.handleToggleShow} variant="fab" className={classes.fab} color="primary">
+          {icon}
+        </Button>
+      </Tooltip>
     );
   }
 

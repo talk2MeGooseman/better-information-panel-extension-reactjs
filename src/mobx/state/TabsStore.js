@@ -23,7 +23,7 @@ export default class TabsStore {
   @observable saveState = "";
   @observable loadingState = "pending";
   @observable activeStep = ACTIVE_STEP_1;
-  @observable videoOverlayHeight;
+  @observable videoOverlayHeight = '80vh';
   @observable videoComponentVisibility = true;
 
   @computed get tabCount() {
