@@ -22,7 +22,12 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+body {
+  opacity: 1;
+  transition: opacity 150ms;
+}
+
+.transparent {
+  opacity: 0.2;
+  transition: opacity 1s;
 }

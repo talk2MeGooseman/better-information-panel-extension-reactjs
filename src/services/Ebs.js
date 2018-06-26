@@ -31,15 +31,13 @@ export const getPanelInformation = async (token) => {
  * @param {Object} data - github user login info
  * @param {token} token
  */
-export const setPanelInformation = async (token, tabs) => {
+export const setPanelInformation = async (token, data) => {
   let response;
   try {
     response = await axios({
       method: 'POST',
       url: `${EBS_ROOT_URL}/set_panel_information`,
-      data: {
-        tabs
-      },
+      data: data,
       headers: {
         'Content-Type': 'application/json',
         'x-extension-jwt': token,

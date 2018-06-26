@@ -25,19 +25,7 @@ import TabsEditor from '../components/TabsEditor';
 import BetterInformationPanel from './BetterInformationPanel';
 
 // import DevTools from 'mobx-react-devtools';
-// <FormLabel component="legend">Video Component Setting:</FormLabel>
-// <FormControlLabel
-//   control={
-//     <Checkbox
-//       checked={tabsStore.videoComponentVisibility}
-//       onChange={this.handleVisibilityChange}
-//       value="checkedB"
-//       color="primary"
-//     />
-//   }
-//   label="Show by default"
-// />
-// <Divider />
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -95,8 +83,12 @@ class ConfigView extends Component {
 
   handleVisibilityChange = (event) => {
     const { tabsStore } = this.props;
-    console.log(event);
-    tabsStore.videoComponentVisibility = event.target.checked;
+    tabsStore.setVideoComponentVisability(event.target.checked);
+  }
+
+  handleTransparentChange = (event) => {
+    const { tabsStore } = this.props;
+    tabsStore.setVideoComponentTransparency(event.target.checked);
   }
 
   renderSaveState() {
@@ -155,6 +147,30 @@ class ConfigView extends Component {
             </Grid>
 
             <Grid item xs={2}>
+              <FormLabel component="legend">Video Component Setting:</FormLabel>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tabsStore.videoComponentVisibility}
+                    onChange={this.handleVisibilityChange}
+                    value="videoComponentVisibility"
+                    color="primary"
+                  />
+                }
+                label="Show on Channel Load"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={tabsStore.videoComponentTransparent}
+                    onChange={this.handleTransparentChange}
+                    value="videoComponentTransparent"
+                    color="primary"
+                  />
+                }
+                label="Make transparent when not in focus"
+              />
+              <Divider />
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
                 Save
                 {this.renderSaveState()}

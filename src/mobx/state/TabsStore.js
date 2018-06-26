@@ -25,9 +25,20 @@ export default class TabsStore {
   @observable activeStep = ACTIVE_STEP_1;
   @observable videoOverlayHeight = '80vh';
   @observable videoComponentVisibility = true;
+  @observable videoComponentTransparent = true;
 
   @computed get tabCount() {
     return this.tabs.length;
+  }
+
+  setVideoComponentVisability(value) {
+    this.saveState = '';
+    this.videoComponentVisibility = value;
+  }
+
+  setVideoComponentTransparency(value) {
+    this.saveState = '';
+    this.videoComponentTransparent = value;
   }
 
   addTab() {
@@ -57,7 +68,12 @@ export default class TabsStore {
           this.addTab();
           return;
         }
+
         this.activeStep = ACTIVE_STEP_4;
+
+        this.videoComponentTransparent = result.videoComponentTransparent;
+        this.videoComponentVisibility = result.videoComponentVisibility;
+
         this.tabs = result.tabs.map((tab) => {
           return TabModel.fromJS(this, tab);
         })
@@ -107,8 +123,14 @@ export default class TabsStore {
   }
 
   toJS() {
-    return this.tabs.map((tab) => {
+    let jTabs = this.tabs.map((tab) => {
       return tab.toJS();
     });
+
+    return {
+      tabs: jTabs,
+      videoComponentVisibility: this.videoComponentVisibility,
+      videoComponentTransparent: this.videoComponentTransparent,
+    };
   }
 }

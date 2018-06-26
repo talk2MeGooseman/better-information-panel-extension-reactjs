@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import { COMPONENT_ANCHOR, SHOWDOWN_CONFIG, TABS_HEIGHT, CONFIG_PREVIEW_HEIGHT } from "../services/constants";
+import {
+  COMPONENT_ANCHOR,
+  SHOWDOWN_CONFIG,
+  TABS_HEIGHT,
+  CONFIG_PREVIEW_HEIGHT,
+  PANEL_FADE_OUT_DELAY,
+} from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
@@ -15,9 +21,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import * as Showdown from "showdown";
 import ReactHtmlParser from 'react-html-parser';
-
-// TODO Look in to prevent XSS in the markdown
-// TODO Wire in colors to change text and background
 
 const styles = theme => ({
   root: {
@@ -47,7 +50,7 @@ class BetterInformationPanel extends Component {
 
   state = {
     value: 0,
-    hidden: false,
+    isVisible: true,
   };
 
   constructor(props) {
@@ -55,11 +58,74 @@ class BetterInformationPanel extends Component {
     this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
   }
 
+
+  /**
+   *Life cycle handler for mobx state changes
+   *
+   * @memberof BetterInformationPanel
+   */
   componentWillReact() {
     let { tabsStore } = this.props;
 
+    // Check if the user deleted the tab index we are currently focused on
+    // If they did then move to the next tab over
     if (this.state.value >= tabsStore.tabCount) {
       this.setState({ value: tabsStore.tabCount - 1 });
+    }
+  }
+
+  initOnEnterHandler() {
+    document.body.addEventListener("mouseenter", (event) => {
+      window.Twitch.ext.rig.log('Mouse Entered');
+
+      // Clear the timer if the user interacts with the component
+      // Before it fires off
+      if (this.timerID) {
+        clearTimeout(this.timerID);
+      }
+
+      document.body.classList.remove('transparent');
+    });
+  }
+
+  initOnLeaveHandler() {
+    document.body.addEventListener("mouseleave", (event) => {
+      window.Twitch.ext.rig.log('Mouse Exit');
+      document.body.classList.add('transparent');
+    });
+  }
+
+  setComponentVisibility() {
+    let { tabsStore } = this.props;
+
+    let isVisible = tabsStore.videoComponentVisibility;
+
+    this.setState({
+      isVisible: isVisible,
+    });
+  }
+
+  setComponentTransparency() {
+    let { tabsStore } = this.props;
+
+    if (tabsStore.videoComponentTransparent) {
+      // Make transparent after a fixed amount of time after first load
+      this.timerID = setTimeout(() => {
+        this.timerID = null;
+        document.body.classList.add("transparent");
+      }, PANEL_FADE_OUT_DELAY);
+
+      this.initOnEnterHandler();
+      this.initOnLeaveHandler();
+    }
+  }
+
+  componentWillMount() {
+    let { viewAnchor } = this.props;
+
+    if (viewAnchor === COMPONENT_ANCHOR) {
+      this.setComponentTransparency();
+      this.setComponentVisibility();
     }
   }
 
@@ -72,14 +138,12 @@ class BetterInformationPanel extends Component {
   };
 
   handleToggleShow = () => {
-    let hidden = this.state.hidden;
-
     this.setState({
-      hidden: !hidden, 
+      isVisible: !this.state.isVisible, 
     });
   }
 
-  toHTML(markdown) {
+  markdownToHtml(markdown) {
     return ReactHtmlParser(this.converter.makeHtml(markdown), {
       transform: (node) => {
         if (node.type === 'tag' && node.name === 'a')
@@ -121,7 +185,7 @@ class BetterInformationPanel extends Component {
 
       return (
         <div key={tab.id} style={styles} className={classes.tabBody}>
-          {this.toHTML(tab.body)}
+          {this.markdownToHtml(tab.body)}
         </div>
       );
     });
@@ -136,7 +200,7 @@ class BetterInformationPanel extends Component {
       return;
     }
 
-    if (this.state.hidden) {
+    if (!this.state.isVisible) {
       icon = <VisibilityOffIcon />;
       tooltipText = "Show";
     }
@@ -152,7 +216,7 @@ class BetterInformationPanel extends Component {
 
   render() {
     const { classes, theme, tabsStore } = this.props;
-    const { value, hidden } = this.state;
+    const { value, isVisible } = this.state;
     const selectedTab = tabsStore.tabs[value];
 
     if (!selectedTab) {
@@ -161,7 +225,7 @@ class BetterInformationPanel extends Component {
 
     const styles = {
       background: selectedTab.bgColor,
-      display: `${ hidden ? 'none' : '' }`
+      visibility: `${ isVisible ? '' : 'hidden' }`
     }
 
     const slideStyles = {

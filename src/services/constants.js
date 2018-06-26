@@ -22,6 +22,8 @@ export const ACTIVE_STEP_4 = 3;
 export const TABS_HEIGHT = 70;
 export const CONFIG_PREVIEW_HEIGHT = 415;
 
+export const PANEL_FADE_OUT_DELAY = 3000;
+
 export const SHOWDOWN_CONFIG = {
   tables: true,
   simplifiedAutoLink: false,
