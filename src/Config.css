@@ -1,4 +1,4 @@
 .CodeMirror {
   height: 350px !important;
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
 }
