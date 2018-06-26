@@ -71,8 +71,14 @@ export default class TabsStore {
 
         this.activeStep = ACTIVE_STEP_4;
 
-        this.videoComponentTransparent = result.videoComponentTransparent;
-        this.videoComponentVisibility = result.videoComponentVisibility;
+        // Check if the setting are defined from server, could be undefined
+        // And screw shit up, use default state
+        if (result.videoComponentTransparent !== undefined) {
+          this.videoComponentTransparent = result.videoComponentTransparent;
+        }
+        if (result.videoComponentVisibility !== undefined) {
+          this.videoComponentVisibility = result.videoComponentVisibility;
+        }
 
         this.tabs = result.tabs.map((tab) => {
           return TabModel.fromJS(this, tab);
