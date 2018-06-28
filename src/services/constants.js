@@ -43,6 +43,8 @@ export const DEFAULT_BODY_TEXT = `## Features:
 * Enable as a panel or video overlay
 * Add an image by putting in the URL to the image you want to display:
 ![](https://imgur.com/ifSv0VG.png)
+* You can also resize the image like so:
+![](https://imgur.com/ifSv0VG.png =100x50)
 
 **Steps to success:**
 - [x] Install the extension
