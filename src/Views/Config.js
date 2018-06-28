@@ -23,6 +23,7 @@ import ProgressBar from '../components/ProgressBar';
 import InfoTabForm from '../components/InfoTabForm';
 import TabsEditor from '../components/TabsEditor';
 import BetterInformationPanel from './BetterInformationPanel';
+import { FormControl } from '../../node_modules/@material-ui/core';
 
 // import DevTools from 'mobx-react-devtools';
 
@@ -34,8 +35,9 @@ const styles = theme => ({
     flex: 1,
   },
   rootPaper: {
-    height: '900px',
-    background: theme.palette.background.default
+    height: '100%',
+    background: theme.palette.background.default,
+    paddingLeft: theme.spacing.unit,
   },
   paper: {
     textAlign: 'left',
@@ -58,6 +60,12 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit
   },
   button: {
+    marginTop: theme.spacing.unit * 5,
+  },
+  divider: {
+    marginBottom: theme.spacing.unit,
+  },
+  settingsAndSave: {
     marginTop: theme.spacing.unit * 5,
   }
 });
@@ -118,58 +126,62 @@ class ConfigView extends Component {
       <div className={classes.root}>
         <ProgressBar tabsStore={tabsStore} />
         <Paper className={classes.rootPaper}>
+          {/* Tabs Creation */}
+          <Typography variant="headline" gutterBottom>
+            Add Tab
+          </Typography>
+          <Divider className={classes.divider} />
           <Grid container spacing={8}>
-            <Grid item xs={2} justify="center">
-              <section className={classes.spacedContent}>
-                <Typography variant="headline" gutterBottom>
-                  Add Tab
-                </Typography>
-                <InfoTabForm tabsStore={tabsStore} />
-              </section>
-            </Grid>
-
-            <Grid item xs={4}>
+            <InfoTabForm tabsStore={tabsStore} />
+          </Grid>
+          <Grid container spacing={8}>
+            {/* Markdown Editor Step*/}
+            <Grid item md={4}>
               <Typography variant="headline" gutterBottom>
-                Enter Markdown Text - <a href="https://simplemde.com/markdown-guide" target="_blank">Help</a>
+                Enter Markdown Text - <a href="https://simplemde.com/markdown-guide" target="_blank" rel="noopener noreferrer">Help</a>
               </Typography>
+              <Divider className={classes.divider} />
               <section className={classes.editorSection}>
                 <TabsEditor tabsStore={tabsStore} />
               </section>
             </Grid>
-
-            <Grid item xs={4}>
+            {/* Extension Preview */}
+            <Grid item md={4}>
               <Typography variant="headline" gutterBottom>
                 Preview
               </Typography>
+              <Divider className={classes.divider} />
               <Paper className={classes.panelPreviewPaper}>
                 <BetterInformationPanel configPreview={true} tabsStore={tabsStore} />
               </Paper>
             </Grid>
-
-            <Grid item xs={2}>
-              <FormLabel component="legend">Video Component Setting:</FormLabel>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={tabsStore.videoComponentVisibility}
-                    onChange={this.handleVisibilityChange}
-                    value="videoComponentVisibility"
-                    color="primary"
-                  />
-                }
-                label="Show on Channel Load"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={tabsStore.videoComponentTransparent}
-                    onChange={this.handleTransparentChange}
-                    value="videoComponentTransparent"
-                    color="primary"
-                  />
-                }
-                label="Make transparent when not in focus"
-              />
+            {/* Configuration and Saving */}
+            <Grid item md={2} className={classes.settingsAndSave}>
+              <FormControl>
+                <FormLabel component="legend">Video Component Settings:</FormLabel>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={tabsStore.videoComponentVisibility}
+                      onChange={this.handleVisibilityChange}
+                      value="videoComponentVisibility"
+                      color="primary"
+                    />
+                  }
+                  label="Show on Channel Load"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={tabsStore.videoComponentTransparent}
+                      onChange={this.handleTransparentChange}
+                      value="videoComponentTransparent"
+                      color="primary"
+                    />
+                  }
+                  label="Make transparent when not in focus"
+                />
+              </FormControl>
               <Divider />
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
                 Save

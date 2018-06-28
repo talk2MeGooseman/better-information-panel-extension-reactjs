@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { observer } from "mobx-react";
 import styled from "styled-components";
 import * as Showdown from "showdown";
 import { SHOWDOWN_CONFIG } from "../services/constants";

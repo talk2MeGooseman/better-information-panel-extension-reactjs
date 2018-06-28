@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -14,8 +15,9 @@ const MAX_TABS = 3;
 
 const styles = theme => ({
   container: {
+  },
+  addTabButton: {
     display: 'flex',
-    flexWrap: 'wrap',
   },
   formControl: {
     marginLeft: theme.spacing.unit,
@@ -42,7 +44,9 @@ class InfoTabForm extends React.Component {
 
     return tabsStore.tabs.map((tabData) => {
       return (
-        <TabSectionInfoInputGroup key={tabData.id} tabsStore={tabsStore} index={count++} tabData={tabData} />
+        <Grid item md={3}>
+          <TabSectionInfoInputGroup key={tabData.id} tabsStore={tabsStore} index={count++} tabData={tabData} />
+        </Grid>
       );
     });
   }
@@ -53,14 +57,16 @@ class InfoTabForm extends React.Component {
     const disableButton = tabsStore.tabCount >= MAX_TABS;
 
     return (
-      <div className={classes.container}>
-        <FormControl>
+        <React.Fragment>
           { this.renderTabInputs() }
-          <Button disabled={disableButton} onClick={this.handleAddTab} variant="fab" color="primary" aria-label="add" className={classes.button}>
-            <AddIcon />
-          </Button>
-        </FormControl>
-      </div>
+          <Grid className={classes.addTabButton} item md={3} alignContent={'center'} alignItems={'center'} justify={'center'}>
+            <Tooltip title="Add Tab" placement={"top"}>
+              <Button disabled={disableButton} onClick={this.handleAddTab} variant="fab" color="primary" aria-label="add" className={classes.button}>
+                <AddIcon />
+              </Button>
+            </Tooltip>
+          </Grid>
+        </React.Fragment>
     );
   }
 }
