@@ -7,6 +7,7 @@ import {
   TABS_HEIGHT,
   CONFIG_PREVIEW_HEIGHT,
   PANEL_FADE_OUT_DELAY,
+  WEB_PLATFORM,
 } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
@@ -46,6 +47,7 @@ class BetterInformationPanel extends Component {
     tabsStore: PropTypes.object.isRequired,
     viewAnchor: PropTypes.string,
     configPreview: PropTypes.bool,
+    viewPlatform: PropTypes.string,
   };
 
   state = {
@@ -121,9 +123,9 @@ class BetterInformationPanel extends Component {
   }
 
   componentWillMount() {
-    let { viewAnchor } = this.props;
+    let { viewAnchor, viewPlatform } = this.props;
 
-    if (viewAnchor === COMPONENT_ANCHOR) {
+    if (viewAnchor === COMPONENT_ANCHOR && viewPlatform === WEB_PLATFORM) {
       this.setComponentTransparency();
       this.setComponentVisibility();
     }
@@ -166,7 +168,7 @@ class BetterInformationPanel extends Component {
   }
 
   renderTabBody() {
-    const { tabsStore, classes, configPreview, viewAnchor } = this.props;
+    const { tabsStore, classes, configPreview, viewAnchor, viewPlatform } = this.props;
     
     return tabsStore.tabs.map((tab) => {
       let styles = {
@@ -174,7 +176,7 @@ class BetterInformationPanel extends Component {
         background: tab.bgColor,
       };
 
-      if (viewAnchor === COMPONENT_ANCHOR) {
+      if (viewAnchor === COMPONENT_ANCHOR && viewPlatform === WEB_PLATFORM) {
         styles['height'] = tabsStore.videoOverlayHeight;
       } else if (configPreview) {
         styles['height'] = CONFIG_PREVIEW_HEIGHT;
@@ -192,11 +194,11 @@ class BetterInformationPanel extends Component {
   }
 
   renderToggleShowButton() {
-    const { classes, viewAnchor } = this.props;
+    const { classes, viewAnchor, viewPlatform } = this.props;
     let icon = <VisibilityIcon />;
     let tooltipText = "Hide";
 
-    if (viewAnchor !== COMPONENT_ANCHOR) {
+    if (viewAnchor !== COMPONENT_ANCHOR || viewPlatform !== WEB_PLATFORM) {
       return;
     }
 
