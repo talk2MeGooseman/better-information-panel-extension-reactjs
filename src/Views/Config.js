@@ -17,13 +17,18 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormLabel from '@material-ui/core/FormLabel';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import TextField from '@material-ui/core/TextField';
+import { FormControl } from '../../node_modules/@material-ui/core';
 
 import * as Showdown from "showdown";
 import ProgressBar from '../components/ProgressBar';
 import InfoTabForm from '../components/InfoTabForm';
 import TabsEditor from '../components/TabsEditor';
+import AvatarButton from '../components/AvatarButton';
 import BetterInformationPanel from './BetterInformationPanel';
-import { FormControl } from '../../node_modules/@material-ui/core';
 
 // import DevTools from 'mobx-react-devtools';
 
@@ -67,6 +72,13 @@ const styles = theme => ({
   },
   settingsAndSave: {
     marginTop: theme.spacing.unit * 5,
+  },
+  avatarTextField: {
+    width: 200,
+  },
+  listItem: {
+    paddingLeft: 0,
+    paddingRight: 0,
   }
 });
 
@@ -99,6 +111,11 @@ class ConfigView extends Component {
     tabsStore.setVideoComponentTransparency(event.target.checked);
   }
 
+  handleCustomIconChange = (event) => {
+    const { tabsStore } = this.props;
+    tabsStore.setVideoToggleImageUrl(event.target.value);
+  }
+
   renderSaveState() {
     const { tabsStore, classes } = this.props;
     let jsx = null;
@@ -117,6 +134,26 @@ class ConfigView extends Component {
     }
 
     return jsx;
+  }
+
+  renderAvatarFormField() {
+    const { classes, tabsStore } = this.props;
+    return (
+      <List>
+        <ListItem className={classes.listItem}>
+          <AvatarButton isVisible videoToggleImageUrl={tabsStore.videoToggleImageUrl} />
+          <ListItemText>
+            <TextField
+              label="Custom Toggle Overlay Icon"
+              className={classes.avatarTextField}
+              value={tabsStore.videoToggleImageUrl}
+              onChange={this.handleCustomIconChange}
+              margin="normal"
+            />
+          </ListItemText>
+        </ListItem>
+      </List>
+    );
   }
 
   render() {
@@ -158,7 +195,8 @@ class ConfigView extends Component {
             {/* Configuration and Saving */}
             <Grid item md={2} className={classes.settingsAndSave}>
               <FormControl>
-                <FormLabel component="legend">Video Component Settings:</FormLabel>
+                <FormLabel component="legend">Video Component (Overlay) Settings:</FormLabel>
+                {/* Show on load checkbox */}
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -170,6 +208,7 @@ class ConfigView extends Component {
                   }
                   label="Show on Channel Load"
                 />
+                {/* Transparent on Hover checkbox*/}
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -181,6 +220,8 @@ class ConfigView extends Component {
                   }
                   label="Make transparent when not in focus"
                 />
+                {/* Custom close avatar image */}
+                {this.renderAvatarFormField()}
               </FormControl>
               <Divider />
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">

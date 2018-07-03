@@ -15,13 +15,10 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import Tooltip from '@material-ui/core/Tooltip';
 
 import * as Showdown from "showdown";
 import ReactHtmlParser from 'react-html-parser';
+import AvatarButton from '../components/AvatarButton';
 
 const styles = theme => ({
   root: {
@@ -194,25 +191,19 @@ class BetterInformationPanel extends Component {
   }
 
   renderToggleShowButton() {
-    const { classes, viewAnchor, viewPlatform } = this.props;
-    let icon = <VisibilityIcon />;
-    let tooltipText = "Hide";
+    const { viewAnchor, viewPlatform, tabsStore } = this.props;
 
     if (viewAnchor !== COMPONENT_ANCHOR || viewPlatform !== WEB_PLATFORM) {
       return;
     }
 
-    if (!this.state.isVisible) {
-      icon = <VisibilityOffIcon />;
-      tooltipText = "Show";
-    }
-
     return (
-      <Tooltip id="tooltip-top" title={tooltipText} placement="top">
-        <Button mini onClick={this.handleToggleShow} variant="fab" className={classes.fab} color="primary">
-          {icon}
-        </Button>
-      </Tooltip>
+      <AvatarButton
+        handleToggleShow={this.handleToggleShow}
+        videoToggleImageUrl ={tabsStore.videoToggleImageUrl}
+        isVisible={this.state.isVisible}
+        fab={true}
+      />
     );
   }
 

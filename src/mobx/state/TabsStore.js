@@ -26,6 +26,7 @@ export default class TabsStore {
   @observable videoOverlayHeight = '80vh';
   @observable videoComponentVisibility = true;
   @observable videoComponentTransparent = true;
+  @observable videoToggleImageUrl = null;
 
   @computed get tabCount() {
     return this.tabs.length;
@@ -39,6 +40,11 @@ export default class TabsStore {
   setVideoComponentTransparency(value) {
     this.saveState = '';
     this.videoComponentTransparent = value;
+  }
+
+  setVideoToggleImageUrl(value) {
+    this.saveState = '';
+    this.videoToggleImageUrl = value;
   }
 
   addTab() {
@@ -137,6 +143,7 @@ export default class TabsStore {
       tabs: jTabs,
       videoComponentVisibility: this.videoComponentVisibility,
       videoComponentTransparent: this.videoComponentTransparent,
+      videoToggleImageUrl: this.videoToggleImageUrl,
     };
   }
 }
