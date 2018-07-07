@@ -25,6 +25,13 @@ export const ACTIVE_STEP_4 = 3;
 // View values
 export const TABS_HEIGHT = 70;
 export const CONFIG_PREVIEW_HEIGHT = 415;
+// Visibility Toggle Button Position
+export const VISIBILITY_BUTTON_POSITIONS = [
+  { value: 'BottomRight', label: 'Bottom Right' },
+  { value: 'BottomLeft', label: 'Bottom Left' },
+  { value: 'TopLeft', label: 'Top Left' },
+  { value: 'TopRight', label: 'Top Right' },
+];
 
 export const PANEL_FADE_OUT_DELAY = 3000;
 

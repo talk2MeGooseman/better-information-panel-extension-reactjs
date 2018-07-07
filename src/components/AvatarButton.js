@@ -10,10 +10,25 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  fab: {
+  BottomRight: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 3,
+  },
+  BottomLeft: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    left: theme.spacing.unit * 3,
+  },
+  TopRight: {
+    position: 'absolute',
+    top: theme.spacing.unit * 6,
+    right: theme.spacing.unit * 3,
+  },
+  TopLeft: {
+    position: 'absolute',
+    top: theme.spacing.unit * 6,
+    left: theme.spacing.unit * 3,
   },
   avatar: {
     width: 30,
@@ -22,7 +37,7 @@ const styles = theme => ({
 });
 
 const AvatarButton = (props) => {
-  const { classes, isVisible, videoToggleImageUrl, handleToggleShow, fab } = props;
+  const { classes, isVisible, configView, videoToggleImageUrl, handleToggleShow, fab } = props;
   let icon, tooltipText, fabClass;
 
   if (isVisible)
@@ -38,9 +53,14 @@ const AvatarButton = (props) => {
     icon = <Avatar src={videoToggleImageUrl} className={classes.avatar} />
   }
 
-  if (fab) {
-    fabClass = classes.fab;
+  if (!configView) {
+    if (fab) {
+      fabClass = classes[fab];
+    } else {
+      fabClass = classes['BottomRight'];
+    }
   }
+
 
   return (
     <Tooltip id="tooltip-top" title={tooltipText} placement="top">
@@ -54,8 +74,10 @@ const AvatarButton = (props) => {
 AvatarButton.propTypes = {
   classes: PropTypes.object,
   isVisible: PropTypes.bool,
+  configView: PropTypes.bool,
   videoToggleImageUrl: PropTypes.string,
   handleToggleShow: PropTypes.func,
+  fab: PropTypes.string,
 };
 
 export default withStyles(styles)(AvatarButton);

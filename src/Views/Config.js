@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import '../App.css';
 import '../Config.css'
-import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING } from "../services/constants";
+import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING, VISIBILITY_BUTTON_POSITIONS } from "../services/constants";
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -21,7 +21,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
-import { FormControl } from '../../node_modules/@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import * as Showdown from "showdown";
 import ProgressBar from '../components/ProgressBar';
@@ -116,6 +121,11 @@ class ConfigView extends Component {
     tabsStore.setVideoToggleImageUrl(event.target.value);
   }
 
+  handlePositionChange = (event) => {
+    const { tabsStore } = this.props;
+    tabsStore.setVideoToggleButtonPosition(event.target.value);
+  }
+
   renderSaveState() {
     const { tabsStore, classes } = this.props;
     let jsx = null;
@@ -141,18 +151,41 @@ class ConfigView extends Component {
     return (
       <List>
         <ListItem className={classes.listItem}>
-          <AvatarButton isVisible videoToggleImageUrl={tabsStore.videoToggleImageUrl} />
+          <AvatarButton isVisible videoToggleImageUrl={tabsStore.videoToggleImageUrl} configView />
           <ListItemText>
             <TextField
-              label="Custom Toggle Overlay Icon"
+              label="Visibility Toggle Icon Image"
               className={classes.avatarTextField}
               value={tabsStore.videoToggleImageUrl}
               onChange={this.handleCustomIconChange}
               margin="normal"
             />
+            <FormHelperText>Enter URL for image you want to use</FormHelperText>
           </ListItemText>
         </ListItem>
       </List>
+    );
+  }
+
+  renderVisibilityTogglePositionFormField() {
+    const { tabsStore } = this.props;
+
+    let selectedValue = tabsStore.videoToggleButtonPosition || 'BottomRight';
+
+    return(
+      <FormControl>
+        <InputLabel htmlFor="visibility-position-helper">Visibility Button Position</InputLabel>
+        <Select
+          value={selectedValue} 
+          onChange={this.handlePositionChange} 
+          input={<Input name="visibility-position" id="visibility-position-helper" />}
+        >
+          { VISIBILITY_BUTTON_POSITIONS.map((position) => (
+            <MenuItem value={position.value}>{ position.label }</MenuItem>
+          ))}
+        </Select>
+        <FormHelperText>Select the location of button on the panel</FormHelperText>
+      </FormControl>
     );
   }
 
@@ -222,6 +255,7 @@ class ConfigView extends Component {
                 />
                 {/* Custom close avatar image */}
                 {this.renderAvatarFormField()}
+                {this.renderVisibilityTogglePositionFormField()}
               </FormControl>
               <Divider />
               <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">

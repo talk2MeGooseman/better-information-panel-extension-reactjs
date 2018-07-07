@@ -29,7 +29,7 @@ export default class TabModel {
     this.store.tabs.remove(this);
   }
 
-  toJS() {
+  toJSON() {
     return {
       id: this.id,
       title: this.title,

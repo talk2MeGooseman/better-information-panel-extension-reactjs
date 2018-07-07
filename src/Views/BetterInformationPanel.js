@@ -27,11 +27,6 @@ const styles = theme => ({
   tabRoot: {
     minWidth: theme.spacing.unit * 8,
   },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3,
-  },
   tabBody: {
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
@@ -202,7 +197,7 @@ class BetterInformationPanel extends Component {
         handleToggleShow={this.handleToggleShow}
         videoToggleImageUrl ={tabsStore.videoToggleImageUrl}
         isVisible={this.state.isVisible}
-        fab={true}
+        fab={tabsStore.videoToggleButtonPosition}
       />
     );
   }

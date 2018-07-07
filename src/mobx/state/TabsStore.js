@@ -26,7 +26,8 @@ export default class TabsStore {
   @observable videoOverlayHeight = '80vh';
   @observable videoComponentVisibility = true;
   @observable videoComponentTransparent = true;
-  @observable videoToggleImageUrl = null;
+  @observable videoToggleImageUrl = '';
+  @observable videoToggleButtonPosition = '';
 
   @computed get tabCount() {
     return this.tabs.length;
@@ -45,6 +46,11 @@ export default class TabsStore {
   setVideoToggleImageUrl(value) {
     this.saveState = '';
     this.videoToggleImageUrl = value;
+  }
+
+  setVideoToggleButtonPosition(value) {
+    this.saveState = '';
+    this.videoToggleButtonPosition = value;
   }
 
   addTab() {
@@ -85,6 +91,12 @@ export default class TabsStore {
         if (result.videoComponentVisibility !== undefined) {
           this.videoComponentVisibility = result.videoComponentVisibility;
         }
+        if (result.videoToggleButtonPosition !== undefined) {
+          this.videoToggleButtonPosition = result.videoToggleButtonPosition;
+        }
+        if (result.videoToggleImageUrl !==  undefined) {
+          this.videoToggleImageUrl = result.videoToggleImageUrl;
+        }
 
         this.tabs = result.tabs.map((tab) => {
           return TabModel.fromJS(this, tab);
@@ -121,7 +133,7 @@ export default class TabsStore {
   @action
   saveTabs() {
     this.saveState = "pending"
-    setPanelInformation(this.token, this.toJS()).then(
+    setPanelInformation(this.token, this.toJSON()).then(
       // inline created action
       action("fetchSuccess", result => {
         this.saveState = "done"
@@ -134,9 +146,9 @@ export default class TabsStore {
     )
   }
 
-  toJS() {
+  toJSON() {
     let jTabs = this.tabs.map((tab) => {
-      return tab.toJS();
+      return tab.toJSON();
     });
 
     return {
@@ -144,6 +156,7 @@ export default class TabsStore {
       videoComponentVisibility: this.videoComponentVisibility,
       videoComponentTransparent: this.videoComponentTransparent,
       videoToggleImageUrl: this.videoToggleImageUrl,
+      videoToggleButtonPosition: this.videoToggleButtonPosition,
     };
   }
 }
