@@ -50,8 +50,8 @@ class BetterInformationPanel extends Component {
   constructor(props) {
     super(props);
     this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
+    this.componentRoot = React.createRef();
   }
-
 
   /**
    *Life cycle handler for mobx state changes
@@ -68,25 +68,41 @@ class BetterInformationPanel extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.componentRoot.current.removeEventListener("mouseenter", this.onMouseEnter);
+    this.componentRoot.current.removeEventListener("mouseleave", this.onMouseLeave);
+    this.componentRoot.current.classList.remove('transparent');
+  }
+
+  onMouseEnter = (event) => {
+    window.Twitch.ext.rig.log('Mouse Entered');
+
+    // Clear the timer if the user interacts with the component
+    // Before it fires off
+    if (this.timerID)
+    {
+      clearTimeout(this.timerID);
+    }
+
+    if (this.componentRoot) {
+      this.componentRoot.current.classList.remove('transparent');
+    }
+  }
+
+  onMouseLeave = (event) => {
+    window.Twitch.ext.rig.log('Mouse Exit');
+
+    if (this.componentRoot) {
+      this.componentRoot.current.classList.add('transparent');
+    }
+  }
+
   initOnEnterHandler() {
-    document.body.addEventListener("mouseenter", (event) => {
-      window.Twitch.ext.rig.log('Mouse Entered');
-
-      // Clear the timer if the user interacts with the component
-      // Before it fires off
-      if (this.timerID) {
-        clearTimeout(this.timerID);
-      }
-
-      document.body.classList.remove('transparent');
-    });
+    this.componentRoot.current.addEventListener("mouseenter", this.onMouseEnter);
   }
 
   initOnLeaveHandler() {
-    document.body.addEventListener("mouseleave", (event) => {
-      window.Twitch.ext.rig.log('Mouse Exit');
-      document.body.classList.add('transparent');
-    });
+    this.componentRoot.current.addEventListener("mouseleave", this.onMouseLeave);
   }
 
   setComponentVisibility() {
@@ -106,7 +122,7 @@ class BetterInformationPanel extends Component {
       // Make transparent after a fixed amount of time after first load
       this.timerID = setTimeout(() => {
         this.timerID = null;
-        document.body.classList.add("transparent");
+        this.componentRoot.current.classList.add("transparent");
       }, PANEL_FADE_OUT_DELAY);
 
       this.initOnEnterHandler();
@@ -114,7 +130,7 @@ class BetterInformationPanel extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let { viewAnchor, viewPlatform } = this.props;
 
     if (viewAnchor === COMPONENT_ANCHOR && viewPlatform === WEB_PLATFORM) {
@@ -220,7 +236,7 @@ class BetterInformationPanel extends Component {
     }
 
     return(
-      <React.Fragment>
+      <div ref={this.componentRoot}>
         <div className={classes.root} style={styles}>
           <AppBar position="static" color="default">
             <Tabs
@@ -244,7 +260,7 @@ class BetterInformationPanel extends Component {
           </SwipeableViews>
         </div>
         {this.renderToggleShowButton()}
-      </React.Fragment>
+      </div>
     );
   }
 }

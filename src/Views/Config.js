@@ -34,6 +34,7 @@ import InfoTabForm from '../components/InfoTabForm';
 import TabsEditor from '../components/TabsEditor';
 import AvatarButton from '../components/AvatarButton';
 import BetterInformationPanel from './BetterInformationPanel';
+import VideoComponentPreviewDialog from '../components/VideoComponentPreviewDialog';
 
 // import DevTools from 'mobx-react-devtools';
 
@@ -53,6 +54,7 @@ const styles = theme => ({
     textAlign: 'left',
   },
   panelPreviewPaper: {
+    marginTop: theme.spacing.unit * 2,
     width: '327px',
     height: '502px',
     overflowX: 'hidden',
@@ -101,8 +103,12 @@ class ConfigView extends Component {
       this.converter = new Showdown.Converter({tables: true, simplifiedAutoLink: true});
   }
 
+  componentDidMount() {
+    this.props.tabsStore.videoOverlayHeight = '230px';
+  }
+
   onClickSave = () => {
-    const { tabsStore } = this.props;
+    const { tabsStore } = this.props
     tabsStore.saveTabs();
   }
 
@@ -221,6 +227,11 @@ class ConfigView extends Component {
                 Preview
               </Typography>
               <Divider className={classes.divider} />
+              {/* VIDEO COMPONENT PREVIEW */}
+              <div style={{ textAlign: 'center' }}>
+                <VideoComponentPreviewDialog tabsStore={tabsStore} />
+              </div>
+              {/* PANEL PREVIEW */}
               <Paper className={classes.panelPreviewPaper}>
                 <BetterInformationPanel configPreview={true} tabsStore={tabsStore} />
               </Paper>
