@@ -34,6 +34,7 @@ export const VISIBILITY_BUTTON_POSITIONS = [
 ];
 
 export const PANEL_FADE_OUT_DELAY = 3000;
+export const MAX_TABS = 30;
 
 export const SHOWDOWN_CONFIG = {
   tables: true,

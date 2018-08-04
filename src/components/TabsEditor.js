@@ -41,11 +41,13 @@ class TabsEditor extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    let { tabsStore } = this.props;
+    tabsStore.tabIndex = value;
   };
 
   handleChangeIndex = index => {
-    this.setState({ value: index });
+    let { tabsStore } = this.props;
+    tabsStore.tabIndex = index;
   };
 
   renderTabs() {
@@ -64,13 +66,13 @@ class TabsEditor extends React.Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, tabsStore } = this.props;
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
-            value={this.state.value}
+            value={tabsStore.tabIndex}
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
@@ -82,7 +84,7 @@ class TabsEditor extends React.Component {
         </AppBar>
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={this.state.value}
+          index={tabsStore.tabIndex}
           onChangeIndex={this.handleChangeIndex}
         >
           {this.renderEditor()}

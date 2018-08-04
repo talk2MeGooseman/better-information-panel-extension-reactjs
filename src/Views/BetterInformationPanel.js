@@ -140,11 +140,14 @@ class BetterInformationPanel extends Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    let { tabsStore } = this.props;
+    // this.setState({ value });
+    tabsStore.tabIndex = value;
   };
 
   handleChangeIndex = index => {
-    this.setState({ value: index });
+    let { tabsStore } = this.props;
+    tabsStore.tabIndex = index;
   };
 
   handleToggleShow = () => {
@@ -220,8 +223,8 @@ class BetterInformationPanel extends Component {
 
   render() {
     const { classes, theme, tabsStore } = this.props;
-    const { value, isVisible } = this.state;
-    const selectedTab = tabsStore.tabs[value];
+    const { isVisible } = this.state;
+    const selectedTab = tabsStore.tabs[tabsStore.tabIndex];
 
     if (!selectedTab) {
       return <p>Couldn't find configuration</p>;
@@ -240,7 +243,7 @@ class BetterInformationPanel extends Component {
         <div className={classes.root} style={styles}>
           <AppBar position="static" color="default">
             <Tabs
-              value={this.state.value}
+              value={tabsStore.tabIndex}
               onChange={this.handleChange}
               indicatorColor="primary"
               textColor="primary"
@@ -252,7 +255,7 @@ class BetterInformationPanel extends Component {
           </AppBar>
           <SwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={this.state.value}
+            index={tabsStore.tabIndex}
             onChangeIndex={this.handleChangeIndex}
             slideStyle={slideStyles}
           >

@@ -28,6 +28,7 @@ export default class TabsStore {
   @observable videoComponentTransparent = true;
   @observable videoToggleImageUrl = '';
   @observable videoToggleButtonPosition = '';
+  @observable tabIndex = 0;
 
   @computed get tabCount() {
     return this.tabs.length;

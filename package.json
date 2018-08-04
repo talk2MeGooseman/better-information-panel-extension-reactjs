@@ -43,6 +43,8 @@
     "react": "^16.3.2",
     "react-color": "^2.14.1",
     "react-dev-utils": "^5.0.1",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-html-parser": "^2.0.2",
     "react-mde": "^5.5.1",
@@ -78,7 +80,9 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {

@@ -6,12 +6,12 @@ import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { MAX_TABS } from '../services/constants';
 
 import TabSectionInfoInputGroup from './TabSectionInfoInputGroup';
 
 import { observer } from 'mobx-react';
 
-const MAX_TABS = 3;
 
 const styles = theme => ({
   container: {
