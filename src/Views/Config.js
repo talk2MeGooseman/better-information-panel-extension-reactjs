@@ -30,11 +30,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import * as Showdown from "showdown";
 import ProgressBar from '../components/ProgressBar';
-import InfoTabForm from '../components/InfoTabForm';
+import PanelTabsConfig from '../components/PanelTabsConfig';
 import TabsEditor from '../components/TabsEditor';
 import AvatarButton from '../components/AvatarButton';
 import BetterInformationPanel from './BetterInformationPanel';
 import VideoComponentPreviewDialog from '../components/VideoComponentPreviewDialog';
+
+
+import { arrayMove } from 'react-sortable-hoc';
 
 // import DevTools from 'mobx-react-devtools';
 
@@ -195,6 +198,11 @@ class ConfigView extends Component {
     );
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    let { tabsStore } = this.props;
+    tabsStore.tabs = arrayMove(tabsStore.tabs, oldIndex, newIndex);
+  };
+
   render() {
     const { classes, tabsStore } = this.props;
 
@@ -207,9 +215,7 @@ class ConfigView extends Component {
             Add Tab
           </Typography>
           <Divider className={classes.divider} />
-          <Grid container spacing={8}>
-            <InfoTabForm tabsStore={tabsStore} />
-          </Grid>
+          <PanelTabsConfig tabsStore={tabsStore} axis="xy" onSortEnd={this.onSortEnd} useDragHandle={true} />
           <Grid container spacing={8}>
             {/* Markdown Editor Step*/}
             <Grid item md={4}>

@@ -10,8 +10,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DragHandleUI from '@material-ui/icons/OpenWith';
 
-import { FormGroup } from '@material-ui/core';
+
+import { FormGroup, Icon } from '@material-ui/core';
+
+import { SortableHandle } from 'react-sortable-hoc';
 
 import ColorPicker from './ColorPicker';
 
@@ -25,10 +29,16 @@ const styles = theme => ({
   cardContent: {
     paddingTop: 0,
     paddingBottom: 0,
+  },
+  dragHandle: {
+    cursor: 'move'
   }
 });
 
-const TabSectionInfoInputGroup = observer((props) => {
+
+const DragHandle = SortableHandle(() => <DragHandleUI />);
+
+const TabConfig = observer((props) => {
   const { classes, tabsStore } = props;
   const handleTitleChange = (event) => {
     props.tabData.title = event.target.value;
@@ -50,19 +60,20 @@ const TabSectionInfoInputGroup = observer((props) => {
     tabsStore.saveState = '';
   };
 
-  let action = null;
+  let actions = [];
   if(props.tabData.canDestroy()) {
-    action = (
+    actions.push(
       <IconButton onClick={handleDeleteClick} className={classes.button} aria-label="Delete">
         <DeleteIcon />
       </IconButton>
     );
   }
+  actions.push(<Icon className={classes.dragHandle} aria-label="Reorder"><DragHandle /></Icon>);
 
   return(
     <Card className={classes.card}>
       <CardHeader
-        action={action}
+        action={actions}
         title={`Tab ${props.index}`}
       />
       <CardContent className={classes.cardContent}>
@@ -87,11 +98,11 @@ const TabSectionInfoInputGroup = observer((props) => {
   )
 });
 
-TabSectionInfoInputGroup.propTypes = {
+TabConfig.propTypes = {
   classes: PropTypes.object.isRequired,
   index: PropTypes.number,
   tabData: PropTypes.object.isRequired,
   tabsStore: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TabSectionInfoInputGroup);
+export default withStyles(styles)(TabConfig);
