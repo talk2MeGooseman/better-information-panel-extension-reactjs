@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import {
   COMPONENT_ANCHOR,
-  SHOWDOWN_CONFIG,
   TABS_HEIGHT,
   CONFIG_PREVIEW_HEIGHT,
   PANEL_FADE_OUT_DELAY,
   WEB_PLATFORM,
 } from "../services/constants";
+import MarkdownToHtml from "../services/MarkdownToHtml";
 
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
@@ -16,8 +16,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import * as Showdown from "showdown";
-import ReactHtmlParser from 'react-html-parser';
 import AvatarButton from '../components/AvatarButton';
 
 const styles = theme => ({
@@ -49,7 +47,6 @@ class BetterInformationPanel extends Component {
 
   constructor(props) {
     super(props);
-    this.converter = new Showdown.Converter(SHOWDOWN_CONFIG);
     this.componentRoot = React.createRef();
   }
 
@@ -156,21 +153,6 @@ class BetterInformationPanel extends Component {
     });
   }
 
-  markdownToHtml(markdown) {
-    return ReactHtmlParser(this.converter.makeHtml(markdown), {
-      transform: (node) => {
-        if (node.type === 'tag' && node.name === 'a')
-        {
-          return <p>Sorry links not allowed, Twitch Rules :(</p>;
-        }
-        if (node.type === 'script' && node.name === 'script')
-        {
-          return <p>No Scripts Tags Allowed!</p>;
-        }
-      }
-    })
-  }
-
   renderTabs() {
     let { classes, tabsStore } = this.props;
     return tabsStore.tabs.map((tab) => {
@@ -198,7 +180,7 @@ class BetterInformationPanel extends Component {
 
       return (
         <div key={tab.id} style={styles} className={classes.tabBody}>
-          {this.markdownToHtml(tab.body)}
+          {MarkdownToHtml(tab.body)}
         </div>
       );
     });
