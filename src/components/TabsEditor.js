@@ -15,12 +15,11 @@ const styles = theme => ({
   },
   tabRoot: {
     minWidth: theme.spacing.unit * 8,
-  }
+  },
 });
 
 @observer
 class TabsEditor extends React.Component {
-
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
@@ -32,13 +31,13 @@ class TabsEditor extends React.Component {
     value: 0,
   };
 
-  componentWillReact() {
-    let { tabsStore } = this.props;
+  // componentWillReact() {
+  //   // let { tabsStore } = this.props;
 
-    if (this.state.value >= tabsStore.tabCount  ) {
-      this.setState({ value: tabsStore.tabCount - 1 });
-    }
-  }
+  //   if (this.state.value >= tabsStore.tabCount) {
+  //     this.setState({ value: tabsStore.tabCount - 1 });
+  //   }
+  // }
 
   handleChange = (event, value) => {
     let { tabsStore } = this.props;
@@ -52,16 +51,27 @@ class TabsEditor extends React.Component {
 
   renderTabs() {
     let { classes, tabsStore } = this.props;
-    return tabsStore.tabs.map((tab) => {
-      return <Tab key={tab.id} label={tab.title} classes={{ root: classes.tabRoot }} />
+    return tabsStore.tabs.map(tab => {
+      return (
+        <Tab
+          key={tab.id}
+          label={tab.title}
+          classes={{ root: classes.tabRoot }}
+        />
+      );
     });
   }
 
   renderEditor() {
     let { tabsStore, allowPreview } = this.props;
 
-    return tabsStore.tabs.map((tab) => (
-      <Editor key={tab.id} tab={tab} tabsStore={tabsStore} allowPreview={allowPreview} />
+    return tabsStore.tabs.map(tab => (
+      <Editor
+        key={tab.id}
+        tab={tab}
+        tabsStore={tabsStore}
+        allowPreview={allowPreview}
+      />
     ));
   }
 
@@ -77,16 +87,14 @@ class TabsEditor extends React.Component {
             indicatorColor="primary"
             textColor="primary"
             scrollable
-            scrollButtons="on"
-          >
+            scrollButtons="on">
             {this.renderTabs()}
           </Tabs>
         </AppBar>
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabsStore.tabIndex}
-          onChangeIndex={this.handleChangeIndex}
-        >
+          onChangeIndex={this.handleChangeIndex}>
           {this.renderEditor()}
         </SwipeableViews>
       </div>

@@ -185,8 +185,8 @@ class ConfigView extends Component {
       <FormControl>
         <InputLabel htmlFor="visibility-position-helper">Visibility Button Position</InputLabel>
         <Select
-          value={selectedValue} 
-          onChange={this.handlePositionChange} 
+          value={selectedValue}
+          onChange={this.handlePositionChange}
           input={<Input name="visibility-position" id="visibility-position-helper" />}
         >
           { VISIBILITY_BUTTON_POSITIONS.map((position) => (
@@ -209,9 +209,9 @@ class ConfigView extends Component {
     return (
       <div className={classes.root}>
         <ProgressBar tabsStore={tabsStore} />
-        <Paper className={classes.rootPaper}>
+        <Paper elevation={2} className={classes.rootPaper}>
           {/* Tabs Creation */}
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             Add Tab
           </Typography>
           <Divider className={classes.divider} />
@@ -219,7 +219,7 @@ class ConfigView extends Component {
           <Grid container spacing={8}>
             {/* Markdown Editor Step*/}
             <Grid item md={4}>
-              <Typography variant="headline" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Enter Markdown Text - <a href="https://simplemde.com/markdown-guide" target="_blank" rel="noopener noreferrer">Help</a>
               </Typography>
               <Divider className={classes.divider} />
@@ -229,7 +229,7 @@ class ConfigView extends Component {
             </Grid>
             {/* Extension Preview */}
             <Grid item md={4}>
-              <Typography variant="headline" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Preview
               </Typography>
               <Divider className={classes.divider} />
@@ -238,7 +238,7 @@ class ConfigView extends Component {
                 <VideoComponentPreviewDialog tabsStore={tabsStore} />
               </div>
               {/* PANEL PREVIEW */}
-              <Paper className={classes.panelPreviewPaper}>
+              <Paper elevation={2} className={classes.panelPreviewPaper}>
                 <BetterInformationPanel configPreview={true} tabsStore={tabsStore} />
               </Paper>
             </Grid>

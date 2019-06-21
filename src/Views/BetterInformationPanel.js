@@ -55,15 +55,15 @@ class BetterInformationPanel extends Component {
    *
    * @memberof BetterInformationPanel
    */
-  componentWillReact() {
-    let { tabsStore } = this.props;
+  // componentWillReact() {
+  //   let { tabsStore } = this.props;
 
-    // Check if the user deleted the tab index we are currently focused on
-    // If they did then move to the next tab over
-    if (this.state.value >= tabsStore.tabCount) {
-      this.setState({ value: tabsStore.tabCount - 1 });
-    }
-  }
+  //   // Check if the user deleted the tab index we are currently focused on
+  //   // If they did then move to the next tab over
+  //   if (this.state.value >= tabsStore.tabCount) {
+  //     this.setState({ value: tabsStore.tabCount - 1 });
+  //   }
+  // }
 
   componentWillUnmount() {
     this.componentRoot.current.removeEventListener("mouseenter", this.onMouseEnter);
@@ -149,7 +149,7 @@ class BetterInformationPanel extends Component {
 
   handleToggleShow = () => {
     this.setState({
-      isVisible: !this.state.isVisible, 
+      isVisible: !this.state.isVisible,
     });
   }
 
@@ -162,7 +162,7 @@ class BetterInformationPanel extends Component {
 
   renderTabBody() {
     const { tabsStore, classes, configPreview, viewAnchor, viewPlatform } = this.props;
-    
+
     return tabsStore.tabs.map((tab) => {
       let styles = {
         color: tab.textColor,

@@ -5,7 +5,7 @@ import * as Showdown from "showdown";
 import { SHOWDOWN_CONFIG } from "../services/constants";
 
 import SimpleMDE from "react-simplemde-editor";
-import "simplemde/dist/simplemde.min.css";
+import "easymde/dist/easymde.min.css";
 
 let TOOLBAR_FEATURES = [
   "heading-1",
@@ -22,6 +22,8 @@ let TOOLBAR_FEATURES = [
   "table",
   "horizontal-rule",
   "guide",
+  "link",
+  "preview"
 ];
 
 export default class Editor extends React.Component {
@@ -43,52 +45,10 @@ export default class Editor extends React.Component {
     this.props.tab.body = value;
   };
 
-  _toggleLine(cm, name) {
-    var startPoint = cm.getCursor("start");
-    var endPoint = cm.getCursor("end");
-
-    var map = {
-      "check-list": "- [ ] ",
-    };
-
-    for (var i = startPoint.line; i <= endPoint.line; i++) {
-      (function(i) {
-        var text = cm.getLine(i);
-
-        text = map[name] + text;
-
-        cm.replaceRange(
-          text,
-          {
-            line: i,
-            ch: 0,
-          },
-          {
-            line: i,
-            ch: 99999999999999,
-          }
-        );
-      })(i);
-    }
-    cm.focus();
-  }
-
-  customCheckListFeature() {
-    return {
-      name: "check-list",
-      className: "fa fa-check",
-      title: "Check List",
-      action: editor => {
-        var cm = editor.codemirror;
-        this._toggleLine(cm, "check-list");
-      }
-    };
-  }
-
   render() {
     const { tab } = this.props;
 
-    let toolbar = [...TOOLBAR_FEATURES, this.customCheckListFeature()];
+    let toolbar = [...TOOLBAR_FEATURES];
 
     let Wrapper = styled.div`
       .editor-preview {

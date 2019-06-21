@@ -60,7 +60,7 @@ class AuthWrapper extends Component {
         alignItems='center'
         justify='center'>
         <Grid item className={classes.demo}>
-            <Paper className={classes.paper}>
+            <Paper elevation={2} className={classes.paper}>
               <CircularProgress className={this.props.classes.progress} />
             </Paper>
         </Grid>

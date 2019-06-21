@@ -7,6 +7,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -64,9 +65,9 @@ const AvatarButton = (props) => {
 
   return (
     <Tooltip id="tooltip-top" title={tooltipText} placement="top">
-      <Button mini onClick={handleToggleShow} variant="fab" className={fabClass} color="primary">
+      <Fab mini onClick={handleToggleShow} className={fabClass} color="primary">
         {icon}
-      </Button>
+      </Fab>
     </Tooltip>
   );
 }

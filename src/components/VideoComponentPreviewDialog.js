@@ -9,7 +9,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import { withStyles } from '@material-ui/core/styles';
 import { COMPONENT_ANCHOR, WEB_PLATFORM } from '../services/constants';
 
@@ -50,7 +49,7 @@ class VideoComponentPreviewDialog extends React.Component {
 
     return (
       <React.Fragment>
-        <Button variant="raised" color="primary" onClick={this.handleClickOpen}>Preview Video Overlay</Button>
+        <Button variant="contained" color="primary" onClick={this.handleClickOpen}>Preview Video Overlay</Button>
         <Dialog
           fullScreen={fullScreen}
           scroll={"body"}
