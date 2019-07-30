@@ -86,14 +86,16 @@ class TabsEditor extends React.Component {
             onChange={this.handleChange}
             indicatorColor="primary"
             textColor="primary"
-            scrollable
-            scrollButtons="on">
+            scrollButtons="auto"
+            variant="scrollable"
+          >
             {this.renderTabs()}
           </Tabs>
         </AppBar>
         <SwipeableViews
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={tabsStore.tabIndex}
+          enableMouseEvents={true}
           onChangeIndex={this.handleChangeIndex}>
           {this.renderEditor()}
         </SwipeableViews>

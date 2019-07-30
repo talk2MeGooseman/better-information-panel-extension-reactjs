@@ -102,38 +102,8 @@ class BetterInformationPanel extends Component {
     this.componentRoot.current.addEventListener("mouseleave", this.onMouseLeave);
   }
 
-  setComponentVisibility() {
-    let { tabsStore } = this.props;
-
-    let isVisible = tabsStore.videoComponentVisibility;
-
-    this.setState({
-      isVisible: isVisible,
-    });
-  }
-
-  setComponentTransparency() {
-    let { tabsStore } = this.props;
-
-    if (tabsStore.videoComponentTransparent) {
-      // Make transparent after a fixed amount of time after first load
-      this.timerID = setTimeout(() => {
-        this.timerID = null;
-        this.componentRoot.current.classList.add("transparent");
-      }, PANEL_FADE_OUT_DELAY);
-
-      this.initOnEnterHandler();
-      this.initOnLeaveHandler();
-    }
-  }
-
   componentDidMount() {
     let { viewAnchor, viewPlatform } = this.props;
-
-    if (viewAnchor === COMPONENT_ANCHOR && viewPlatform === WEB_PLATFORM) {
-      this.setComponentTransparency();
-      this.setComponentVisibility();
-    }
   }
 
   handleChange = (event, value) => {
@@ -186,26 +156,8 @@ class BetterInformationPanel extends Component {
     });
   }
 
-  renderToggleShowButton() {
-    const { viewAnchor, viewPlatform, tabsStore } = this.props;
-
-    if (viewAnchor !== COMPONENT_ANCHOR || viewPlatform !== WEB_PLATFORM) {
-      return;
-    }
-
-    return (
-      <AvatarButton
-        handleToggleShow={this.handleToggleShow}
-        videoToggleImageUrl ={tabsStore.videoToggleImageUrl}
-        isVisible={this.state.isVisible}
-        fab={tabsStore.videoToggleButtonPosition}
-      />
-    );
-  }
-
   render() {
     const { classes, theme, tabsStore } = this.props;
-    const { isVisible } = this.state;
     const selectedTab = tabsStore.tabs[tabsStore.tabIndex];
 
     if (!selectedTab) {
@@ -214,7 +166,6 @@ class BetterInformationPanel extends Component {
 
     const styles = {
       background: selectedTab.bgColor,
-      visibility: `${ isVisible ? '' : 'hidden' }`
     }
 
     const slideStyles = {
@@ -229,8 +180,9 @@ class BetterInformationPanel extends Component {
               onChange={this.handleChange}
               indicatorColor="primary"
               textColor="primary"
-              scrollable={true}
               scrollButtons="on"
+              variant="scrollable"
+              aria-label="Tabs of information"
             >
               {this.renderTabs()}
             </Tabs>
@@ -240,11 +192,11 @@ class BetterInformationPanel extends Component {
             index={tabsStore.tabIndex}
             onChangeIndex={this.handleChangeIndex}
             slideStyle={slideStyles}
+            enableMouseEvents={true}
           >
             {this.renderTabBody()}
           </SwipeableViews>
         </div>
-        {this.renderToggleShowButton()}
       </div>
     );
   }

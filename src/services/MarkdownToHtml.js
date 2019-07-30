@@ -21,6 +21,11 @@ function markdownToHtml(md) {
 function sanitizeHtml(html) {
   return ReactHtmlParser(html, {
     transform: (node) => {
+      if (node.name === 'a')
+      {
+        return <p>Sorry links not allowed, Twitch Rules :(</p>;
+      }
+
       let found = STRIP_TAGS.find((tag) => {
         return node.name === tag;
       });

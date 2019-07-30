@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import { Fab } from '@material-ui/core';
 import { MAX_TABS } from '../services/constants';
 
 import TabConfig from './TabConfig';
@@ -71,9 +72,9 @@ class PanelTabsConfig extends React.Component {
         {this.renderTabInputs()}
         <Grid className={classes.addTabButton} item md={3} alignContent={'center'} alignItems={'center'} justify={'center'}>
           <Tooltip title="Add Tab" placement={"top"}>
-            <Button disabled={disableButton} onClick={this.handleAddTab} variant="fab" color="primary" aria-label="add" className={classes.button}>
+            <Fab color="primary" aria-label="add" disabled={disableButton} onClick={this.handleAddTab}>
               <AddIcon />
-            </Button>
+            </Fab>
           </Tooltip>
         </Grid>
       </Grid>

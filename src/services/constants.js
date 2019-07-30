@@ -34,6 +34,7 @@ export const VISIBILITY_BUTTON_POSITIONS = [
 ];
 // Strip tags
 export const STRIP_TAGS = [
+  'a',
   'script',
   'form',
   'input',
@@ -48,7 +49,7 @@ export const MAX_TABS = 30;
 
 export const SHOWDOWN_CONFIG = {
   tables: true,
-  simplifiedAutoLink: true,
+  simplifiedAutoLink: false,
   strikethrough: true,
   tasklists: true,
   parseImgDimensions: true,

@@ -115,25 +115,6 @@ class ConfigView extends Component {
     tabsStore.saveTabs();
   }
 
-  handleVisibilityChange = (event) => {
-    const { tabsStore } = this.props;
-    tabsStore.setVideoComponentVisability(event.target.checked);
-  }
-
-  handleTransparentChange = (event) => {
-    const { tabsStore } = this.props;
-    tabsStore.setVideoComponentTransparency(event.target.checked);
-  }
-
-  handleCustomIconChange = (event) => {
-    const { tabsStore } = this.props;
-    tabsStore.setVideoToggleImageUrl(event.target.value);
-  }
-
-  handlePositionChange = (event) => {
-    const { tabsStore } = this.props;
-    tabsStore.setVideoToggleButtonPosition(event.target.value);
-  }
 
   renderSaveState() {
     const { tabsStore, classes } = this.props;
@@ -153,49 +134,6 @@ class ConfigView extends Component {
     }
 
     return jsx;
-  }
-
-  renderAvatarFormField() {
-    const { classes, tabsStore } = this.props;
-    return (
-      <List>
-        <ListItem className={classes.listItem}>
-          <AvatarButton isVisible videoToggleImageUrl={tabsStore.videoToggleImageUrl} configView />
-          <ListItemText>
-            <TextField
-              label="Visibility Toggle Icon Image"
-              className={classes.avatarTextField}
-              value={tabsStore.videoToggleImageUrl}
-              onChange={this.handleCustomIconChange}
-              margin="normal"
-            />
-            <FormHelperText>Enter URL for image you want to use</FormHelperText>
-          </ListItemText>
-        </ListItem>
-      </List>
-    );
-  }
-
-  renderVisibilityTogglePositionFormField() {
-    const { tabsStore } = this.props;
-
-    let selectedValue = tabsStore.videoToggleButtonPosition || 'BottomRight';
-
-    return(
-      <FormControl>
-        <InputLabel htmlFor="visibility-position-helper">Visibility Button Position</InputLabel>
-        <Select
-          value={selectedValue}
-          onChange={this.handlePositionChange}
-          input={<Input name="visibility-position" id="visibility-position-helper" />}
-        >
-          { VISIBILITY_BUTTON_POSITIONS.map((position) => (
-            <MenuItem value={position.value}>{ position.label }</MenuItem>
-          ))}
-        </Select>
-        <FormHelperText>Select the location of button on the panel</FormHelperText>
-      </FormControl>
-    );
   }
 
   onSortEnd = ({oldIndex, newIndex}) => {
@@ -244,38 +182,7 @@ class ConfigView extends Component {
             </Grid>
             {/* Configuration and Saving */}
             <Grid item md={2} className={classes.settingsAndSave}>
-              <FormControl>
-                <FormLabel component="legend">Video Component (Overlay) Settings:</FormLabel>
-                {/* Show on load checkbox */}
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={tabsStore.videoComponentVisibility}
-                      onChange={this.handleVisibilityChange}
-                      value="videoComponentVisibility"
-                      color="primary"
-                    />
-                  }
-                  label="Show on Channel Load"
-                />
-                {/* Transparent on Hover checkbox*/}
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={tabsStore.videoComponentTransparent}
-                      onChange={this.handleTransparentChange}
-                      value="videoComponentTransparent"
-                      color="primary"
-                    />
-                  }
-                  label="Make transparent when not in focus"
-                />
-                {/* Custom close avatar image */}
-                {this.renderAvatarFormField()}
-                {this.renderVisibilityTogglePositionFormField()}
-              </FormControl>
-              <Divider />
-              <Button onClick={this.onClickSave} className={classes.button} variant="raised" color="primary">
+              <Button onClick={this.onClickSave} className={classes.button} variant="contained" color="primary">
                 Save
                 {this.renderSaveState()}
               </Button>

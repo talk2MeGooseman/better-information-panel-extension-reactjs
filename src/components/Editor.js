@@ -22,7 +22,6 @@ let TOOLBAR_FEATURES = [
   "table",
   "horizontal-rule",
   "guide",
-  "link",
   "preview"
 ];
 
