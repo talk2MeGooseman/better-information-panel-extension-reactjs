@@ -22,9 +22,11 @@ export const ACTIVE_STEP_1 = 0;
 export const ACTIVE_STEP_2 = 1;
 export const ACTIVE_STEP_3 = 2;
 export const ACTIVE_STEP_4 = 3;
+
 // View values
 export const TABS_HEIGHT = 70;
 export const CONFIG_PREVIEW_HEIGHT = 415;
+
 // Visibility Toggle Button Position
 export const VISIBILITY_BUTTON_POSITIONS = [
   { value: 'BottomRight', label: 'Bottom Right' },
@@ -32,6 +34,7 @@ export const VISIBILITY_BUTTON_POSITIONS = [
   { value: 'TopLeft', label: 'Top Left' },
   { value: 'TopRight', label: 'Top Right' },
 ];
+
 // Strip tags
 export const STRIP_TAGS = [
   'a',
@@ -42,6 +45,7 @@ export const STRIP_TAGS = [
   'link',
   'base',
   'body',
+  'img,'
 ];
 
 export const PANEL_FADE_OUT_DELAY = 3000;
@@ -52,7 +56,7 @@ export const SHOWDOWN_CONFIG = {
   simplifiedAutoLink: false,
   strikethrough: true,
   tasklists: true,
-  parseImgDimensions: true,
+  parseImgDimensions: false,
   smoothLivePreview: true,
   openLinksInNewWindow: true,
   emoji: true,
@@ -64,10 +68,6 @@ export const DEFAULT_BODY_TEXT = `## Features:
 * Easy editing and previewing
 * Customize your text color and background color
 * Enable as a panel or video overlay
-* Add an image by putting in the URL to the image you want to display:
-![](https://imgur.com/ifSv0VG.png)
-* You can also resize the image like so:
-![](https://imgur.com/ifSv0VG.png =100x50)
 
 **Steps to success:**
 - [x] Install the extension

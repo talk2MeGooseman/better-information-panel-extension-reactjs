@@ -15,12 +15,3 @@ export function uuid() {
 
   return uuid;
 }
-
-const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-export const isValidImage = (url) => {
-  if (!allowedExtensions.exec(url)) {
-    return false;
-  }
-
-  return true
-}

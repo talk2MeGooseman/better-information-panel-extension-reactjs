@@ -5,7 +5,6 @@ import {
   COMPONENT_ANCHOR,
   TABS_HEIGHT,
   CONFIG_PREVIEW_HEIGHT,
-  PANEL_FADE_OUT_DELAY,
   WEB_PLATFORM,
 } from "../services/constants";
 import MarkdownToHtml from "../services/MarkdownToHtml";
@@ -15,8 +14,6 @@ import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
-import AvatarButton from '../components/AvatarButton';
 
 const styles = theme => ({
   root: {

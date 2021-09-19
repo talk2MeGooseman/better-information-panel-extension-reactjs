@@ -7,7 +7,7 @@ import { SHOWDOWN_CONFIG } from "../services/constants";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
-let TOOLBAR_FEATURES = [
+const TOOLBAR_FEATURES = [
   "heading-1",
   "heading-2",
   "heading-3",
@@ -18,7 +18,6 @@ let TOOLBAR_FEATURES = [
   "quote",
   "unordered-list",
   "ordered-list",
-  "image",
   "table",
   "horizontal-rule",
   "guide",

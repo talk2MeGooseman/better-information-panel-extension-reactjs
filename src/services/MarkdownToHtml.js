@@ -6,7 +6,6 @@ import {
   SHOWDOWN_CONFIG,
   STRIP_TAGS,
 } from "../services/constants";
-import { isValidImage } from './Utils';
 
 export default function (md) {
   let stripedMd = stripHtml(md);
@@ -24,12 +23,12 @@ function sanitizeHtml(html) {
     transform: (node) => {
       if (node.name === 'a')
       {
-        return <p>Sorry links not allowed, Twitch Rules :(</p>;
+        return <p>Sorry, links not allowed based off Twitch Extension guidelines</p>;
       }
 
-      if (node.name === 'img' && !isValidImage(node.attribs.src))
+      if (node.name === 'img')
       {
-        return <p>Please provide valid image file</p>;
+        return <p>Sorry, images are no longer permitted based off Twitch Extension guidelines</p>;
       }
 
       let found = STRIP_TAGS.find((tag) => {
