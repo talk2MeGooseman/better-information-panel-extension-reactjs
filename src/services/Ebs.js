@@ -1,19 +1,19 @@
 import axios from "axios";
 
-const EBS_ROOT_URL = 'https://us-central1-info-extension.cloudfunctions.net';
-// const EBS_ROOT_URL = 'https://localhost:8080/info-extension/us-central1';
+const EBS_ROOT_URL = 'https://guzman.codes/legacy/bip';
+// const EBS_ROOT_URL = 'http://localhost:4000/legacy/bip';
 
 /**
  * getBoardcasterGithubInfo
- * 
+ *
  * Fetch user Github panel configuration
- * 
- * @param {Object} auth 
+ *
+ * @param {Object} auth
  */
 export const getPanelInformation = async (token) => {
   let response = await axios({
     method: 'GET',
-    url: `${EBS_ROOT_URL}/get_panel_information`,
+    url: `${EBS_ROOT_URL}/get-panel-information`,
     headers: {
       'Content-Type': 'application/json',
       'x-extension-jwt': token,
@@ -24,10 +24,10 @@ export const getPanelInformation = async (token) => {
 };
 
 /**
- * setBroadcasterGithubInfo 
+ * setBroadcasterGithubInfo
  *
  * Set the users Github login information and fetch it
- *  
+ *
  * @param {Object} data - github user login info
  * @param {token} token
  */

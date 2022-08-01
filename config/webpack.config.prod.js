@@ -149,8 +149,7 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
-              compact: true,
+              compact: false,
             },
           },
           // The notation here is somewhat confusing.
@@ -258,7 +257,7 @@ module.exports = {
         template: paths.appPanelHtml,
         minify: {
           removeComments: true,
-          collapseWhitespace: true,
+          collapseWhitespace: false,
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
@@ -275,7 +274,7 @@ module.exports = {
         template: paths.appVideoComponentHtml,
         minify: {
           removeComments: true,
-          collapseWhitespace: true,
+          collapseWhitespace: false,
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
@@ -293,7 +292,7 @@ module.exports = {
         template: paths.appConfigHtml,
         minify: {
           removeComments: true,
-          collapseWhitespace: true,
+          collapseWhitespace: false,
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
@@ -311,7 +310,7 @@ module.exports = {
         template: paths.appDashboardConfigHtml,
         minify: {
           removeComments: true,
-          collapseWhitespace: true,
+          collapseWhitespace: false,
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
