@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
-import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
+import { withStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import React from 'react';
+import SwipeableViews from 'react-swipeable-views';
 import Editor from './Editor';
 
 const styles = theme => ({

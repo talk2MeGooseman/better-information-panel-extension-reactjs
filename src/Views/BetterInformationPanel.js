@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
-  COMPONENT_ANCHOR,
-  TABS_HEIGHT,
-  CONFIG_PREVIEW_HEIGHT,
-  WEB_PLATFORM,
+  COMPONENT_ANCHOR, CONFIG_PREVIEW_HEIGHT, TABS_HEIGHT, WEB_PLATFORM
 } from "../services/constants";
 import MarkdownToHtml from "../services/MarkdownToHtml";
 
-import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
+import { withStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import SwipeableViews from 'react-swipeable-views';
 
 const styles = theme => ({
   root: {

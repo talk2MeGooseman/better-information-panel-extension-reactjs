@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-import { LOAD_DONE, LOAD_ERROR, LOAD_PENDING } from "../services/constants";
+import { LOAD_DONE, LOAD_PENDING } from "../services/constants";
 
-import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   root: {

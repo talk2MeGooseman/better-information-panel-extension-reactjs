@@ -1,40 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import '../App.css';
-import '../Config.css'
-import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING, VISIBILITY_BUTTON_POSITIONS } from "../services/constants";
+import '../Config.css';
+import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING } from "../services/constants";
 
-import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import CachedIcon from '@material-ui/icons/Cached';
 import Done from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
-import CachedIcon from '@material-ui/icons/Cached';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
 
 import * as Showdown from "showdown";
-import ProgressBar from '../components/ProgressBar';
 import PanelTabsConfig from '../components/PanelTabsConfig';
+import ProgressBar from '../components/ProgressBar';
 import TabsEditor from '../components/TabsEditor';
-import AvatarButton from '../components/AvatarButton';
-import BetterInformationPanel from './BetterInformationPanel';
 import VideoComponentPreviewDialog from '../components/VideoComponentPreviewDialog';
+import BetterInformationPanel from './BetterInformationPanel';
 
 
 import { arrayMove } from 'react-sortable-hoc';

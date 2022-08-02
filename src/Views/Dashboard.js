@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import PropTypes from "prop-types";
+import React, { Component } from 'react';
 import TabsEditor from '../components/TabsEditor';
 import '../Dashboard.css';
-import { SAVE_PENDING, SAVE_DONE, SAVE_ERROR } from "../services/constants";
-import { observer } from 'mobx-react';
+import { SAVE_DONE, SAVE_ERROR, SAVE_PENDING } from "../services/constants";
 
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
+import { withStyles } from '@material-ui/core/styles';
 import CachedIcon from '@material-ui/icons/Cached';
 import DoneIcon from '@material-ui/icons/Done';
 import ErrorIcon from '@material-ui/icons/Error';
+import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
   fab: {

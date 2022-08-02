@@ -1,14 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
+import React from 'react';
 
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
 import { withStyles } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const styles = theme => ({
   BottomRight: {
