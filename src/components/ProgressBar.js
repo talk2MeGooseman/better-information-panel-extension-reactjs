@@ -24,7 +24,6 @@ function getSteps() {
   return ['Add your tabs', 'Enter your text', 'Preview', 'Save'];
 }
 
-@observer
 class ProgressBar extends React.Component {
   static propTypes = {
     classes: PropTypes.object,
@@ -55,4 +54,4 @@ class ProgressBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(ProgressBar);
+export default withStyles(styles)(observer(ProgressBar));

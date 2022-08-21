@@ -1,12 +1,12 @@
-import {observable} from 'mobx';
+import { observable, makeObservable } from 'mobx';
 
 export default class TabModel {
   store;
   id;
-  @observable title;
-  @observable textColor;
-  @observable bgColor;
-  @observable body;
+  title;
+  textColor;
+  bgColor;
+  body;
 
   constructor(store, id, title, textColor, bgColor, body) {
     this.store = store;
@@ -15,6 +15,13 @@ export default class TabModel {
     this.textColor = textColor;
     this.bgColor = bgColor;
     this.body = body;
+
+    makeObservable(this, {
+      title: observable,
+      textColor: observable,
+      bgColor: observable,
+      body: observable
+    });
   }
 
   static fromJS(store, {id, title, textColor, bgColor, body}) {

@@ -11,7 +11,11 @@ import {CONFIG_MODE, VIEWER_MODE, DASHBOARD_MODE} from './services/constants'
 import TabsStore from './mobx/state/TabsStore';
 import BetterInformationPanel from './Views/BetterInformationPanel';
 import Dashboard from './Views/Dashboard';
+import { configure } from "mobx"
 
+configure({
+    enforceActions: "never",
+})
 // Get the params from the url
 const params = new URLSearchParams(window.location.search)
 let viewComponent;

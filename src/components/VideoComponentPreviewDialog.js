@@ -25,7 +25,6 @@ const styles = theme => ({
   }
 });
 
-@observer
 class VideoComponentPreviewDialog extends React.Component {
   static propTypes = {
     classes: PropTypes.object,
@@ -78,4 +77,4 @@ VideoComponentPreviewDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(VideoComponentPreviewDialog);
+export default withStyles(styles)(observer(VideoComponentPreviewDialog));

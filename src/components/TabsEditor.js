@@ -18,7 +18,6 @@ const styles = theme => ({
   },
 });
 
-@observer
 class TabsEditor extends React.Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
@@ -104,4 +103,4 @@ class TabsEditor extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(TabsEditor);
+export default withStyles(styles, { withTheme: true })(observer(TabsEditor));

@@ -23,7 +23,6 @@ const styles = theme => ({
   },
 });
 
-@observer
 class AuthWrapper extends Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
@@ -78,4 +77,4 @@ class AuthWrapper extends Component {
   }
 }
 
-export default withStyles(styles)(AuthWrapper);
+export default withStyles(styles)(observer(AuthWrapper));

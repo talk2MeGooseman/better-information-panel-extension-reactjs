@@ -78,7 +78,6 @@ const styles = theme => ({
   }
 });
 
-@observer
 class ConfigView extends Component {
   propsTypes = {
     tabsStore: PropTypes.object.isRequired,
@@ -180,5 +179,5 @@ class ConfigView extends Component {
   }
 }
 
-export default withStyles(styles)(ConfigView);
+export default withStyles(styles)(observer(ConfigView));
 

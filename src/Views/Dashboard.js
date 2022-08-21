@@ -20,7 +20,6 @@ const styles = theme => ({
   },
 });
 
-@observer
 class Dashboard extends Component {
   static propTypes = {
     tabsStore: PropTypes.object.isRequired,
@@ -65,4 +64,4 @@ class Dashboard extends Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(Dashboard);
+export default withStyles(styles, { withTheme: true })(observer(Dashboard));

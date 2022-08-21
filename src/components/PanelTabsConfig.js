@@ -39,7 +39,6 @@ const SortableItem = SortableElement(({ tabData, tabsStore, tabNum:index }) => {
 });
 
 
-@observer
 class PanelTabsConfig extends React.Component {
 
   constructor(props) {
@@ -63,6 +62,7 @@ class PanelTabsConfig extends React.Component {
   }
 
   render() {
+    console.log('renderTabInputs');
     const { classes, tabsStore } = this.props;
 
     const disableButton = tabsStore.tabCount >= MAX_TABS;
@@ -87,7 +87,8 @@ PanelTabsConfig.propTypes = {
   tabsStore: PropTypes.object.isRequired,
 };
 
+const ObservablePanelTabsConfig = observer(PanelTabsConfig);
 
-const SortableList = SortableContainer((props) => <PanelTabsConfig {...props} /> );
+const SortableList = SortableContainer((props) => <ObservablePanelTabsConfig {...props} /> );
 
 export default withStyles(styles)(SortableList);

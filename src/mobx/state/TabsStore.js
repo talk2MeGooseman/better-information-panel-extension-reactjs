@@ -1,8 +1,4 @@
-import {
-  observable,
-  computed,
-  action,
-} from "mobx"
+import { observable, computed, action, makeObservable } from "mobx";
 import TabModel from "../model/TabModel";
 import { uuid } from "../../services/Utils";
 import {
@@ -18,19 +14,39 @@ import {
 } from "../../services/constants";
 
 export default class TabsStore {
-  @observable tabs = [];
-  @observable token;
-  @observable saveState = "";
-  @observable loadingState = "pending";
-  @observable activeStep = ACTIVE_STEP_1;
-  @observable videoOverlayHeight = '80vh';
-  @observable videoComponentVisibility = true;
-  @observable videoComponentTransparent = true;
-  @observable videoToggleImageUrl = '';
-  @observable videoToggleButtonPosition = '';
-  @observable tabIndex = 0;
+  tabs = [];
+  token = null;
+  saveState = "";
+  loadingState = "pending";
+  activeStep = ACTIVE_STEP_1;
+  videoOverlayHeight = '80vh';
+  videoComponentVisibility = true;
+  videoComponentTransparent = true;
+  videoToggleImageUrl = '';
+  videoToggleButtonPosition = '';
+  tabIndex = 0;
 
-  @computed get tabCount() {
+  constructor() {
+    makeObservable(this, {
+      tabs: observable,
+      token: observable,
+      saveState: observable,
+      loadingState: observable,
+      activeStep: observable,
+      videoOverlayHeight: observable,
+      videoComponentVisibility: observable,
+      videoComponentTransparent: observable,
+      videoToggleImageUrl: observable,
+      videoToggleButtonPosition: observable,
+      tabIndex: observable,
+      tabCount: computed,
+      fetchTabs: action,
+      updateTabs: action,
+      saveTabs: action
+    });
+  }
+
+  get tabCount() {
     return this.tabs.length;
   }
 
@@ -70,7 +86,6 @@ export default class TabsStore {
     }));
   }
 
-  @action
   fetchTabs() {
     this.loadingState = "pending"
     getPanelInformation(this.token).then(
@@ -110,7 +125,6 @@ export default class TabsStore {
     )
   }
 
-  @action
   updateTabs() {
     getPanelInformation(this.token).then(
       // inline created action
@@ -131,7 +145,6 @@ export default class TabsStore {
     )
   }
 
-  @action
   saveTabs() {
     this.saveState = "pending"
     setPanelInformation(this.token, this.toJSON()).then(

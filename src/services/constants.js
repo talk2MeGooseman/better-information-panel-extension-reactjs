@@ -70,7 +70,7 @@ export const DEFAULT_BODY_TEXT = `## Features:
 * Enable as a panel or video overlay
 
 **Steps to success:**
-- [x] Install the extension
-- [x] Enable is as _Panel_ or _Video Overlay_
-- [ ] Enter your text
-- [ ] Give your viewers all the information they need`;
+- Install the extension
+- Enable is as _Panel_ or _Video Overlay_
+- Enter your text
+- Give your viewers all the information they need`;
