@@ -5,54 +5,48 @@
   "certificateExceptions": [],
   "extensionViews": [
     {
-      "id": "1",
-      "label": "",
       "channelId": "120750024",
       "configurationAnchor": "panel",
       "displayChannelName": "talk2megooseman",
-      "type": "config",
       "features": {
         "isBitsEnabled": false,
         "isChatEnabled": false,
         "isSubscriptionStatusAvailable": false
       },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "2",
+      "isPopout": false,
+      "label": "",
       "linked": true,
       "linkedUserId": "265737932",
-      "mode": "config",
-      "isPopout": false,
-      "role": "Broadcaster",
-      "x": 0,
-      "y": 0,
       "orientation": "Portrait",
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      }
+      "type": "config",
+      "viewerType": "Broadcaster"
     },
     {
-      "id": "2",
-      "label": "",
       "channelId": "120750024",
       "configurationAnchor": "panel",
       "displayChannelName": "talk2megooseman",
-      "type": "NewComponent",
       "features": {
         "isBitsEnabled": false,
         "isChatEnabled": false,
         "isSubscriptionStatusAvailable": false
       },
-      "linked": false,
-      "linkedUserId": "",
-      "mode": "viewer",
-      "isPopout": false,
-      "role": "Broadcaster",
-      "x": 0,
-      "y": 0,
-      "orientation": "Portrait",
       "frameSize": {
         "width": 1280,
         "height": 720
-      }
+      },
+      "id": "3",
+      "isPopout": false,
+      "label": "",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Broadcaster"
     }
   ],
   "manifest": {
@@ -61,30 +55,30 @@
     "authorName": "talk2megooseman",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "http://localhost:8080/config.html",
+    "configUrl": "http://localhost:8080/index.html",
     "configurationLocation": "custom",
-    "description": "Ever wish the current Twitch panel was better? That it made entering text easier, allowed you to change font color, background color, add multiple tabs for information? And it also allowed you to put it as a panel below your stream or as a video overlay?\r\n\r\nWell, you're in luck because you are looking at the right extension. Say hello to the Better Information Panel! A highly configurable extension allowing you to have multiple tabs of information, change the text and background color of each tab, enter text with an easy to use markdown editor, use it as a panel below your stream or place it over the video to make most know information visible. You can also update your information from the Broadcaster Dashboard and it will refresh for all you chat/viewers.\r\n\r\nGive it a try and provide any feedback to help improve this extension: https://goo.gl/forms/2S80mVNY60Vq5MpH3\r\nCheck out the guy who made it by following: https://www.twitch.tv/talk2megooseman",
+    "description": "Ever wish the current Twitch panel was better? That it made entering text easier, allowed you to change font color, background color, add multiple tabs for information? And it also allowed you to put it as a panel below your stream or as a video overlay?\n\nWell, you're in luck because you are looking at the right extension. Say hello to the Better Information Panel! A highly configurable extension allowing you to have multiple tabs of information, change the text and background color of each tab, enter text with an easy-to-use markdown editor, use it as a panel below your stream or place it over the video to make most know information visible. You can also update your information from the Broadcaster Dashboard and it will refresh for all you chat/viewers.\n\nCheck out the guy who made it by following: https://www.twitch.tv/talk2megooseman",
     "eulaTosUrl": "",
     "hasChatSupport": false,
-    "iconUrl": "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/icon/156/825/636641273932439002.png",
+    "iconUrl": "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/logo78cf92c7-524e-404d-9263-c35527805b56",
     "iconUrls": {
-      "100x100": "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/icon/156/825/636641273932439002.png",
-      "24x24": "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/taskbar-icon/156/826/636641273934157886.png",
-      "300x200": "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/discovery-icon/156/828/636641300130361617.png"
+      "100x100": "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/logo78cf92c7-524e-404d-9263-c35527805b56",
+      "24x24": "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/taskbar49e4a29c-69f5-4e67-889c-f1f747d37cde",
+      "300x200": "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/discoveryd1cae700-938d-4f80-a204-b32f9fdc6fbb"
     },
     "id": "pp16i51f77pxhwls8tqqo72f5m5ttz",
     "installationCount": -42,
-    "liveConfigUrl": "http://localhost:8080/dashboard_config.html",
+    "liveConfigUrl": "http://localhost:8080/index.html",
     "name": "Better Information Panel",
     "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
     "screenshotUrls": [
-      "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/screenshots/230/570/dashboard.png",
-      "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/screenshots/230/571/configview.png",
-      "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/screenshots/230/572/panel.png",
-      "https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/https://pp16i51f77pxhwls8tqqo72f5m5ttz.ext-twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.3.1/3a4b08e4a0f97a909cefb678637adeba/internal/screenshots/231/884/overlay.png"
+      "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/screenshot4f108894-63dd-4b03-b224-c46217757a12",
+      "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/screenshotf56f82f7-a20a-4c5c-a86b-3cdf321d4708",
+      "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/screenshot44deda1c-a1ed-449d-b7f3-3fd5e41e1737",
+      "https://extensions-discovery-images.twitch.tv/pp16i51f77pxhwls8tqqo72f5m5ttz/0.4.0/screenshot801bfb76-54f7-4331-89c9-9fbf7a6c4702"
     ],
     "sku": "",
     "state": "Testing",
@@ -92,43 +86,43 @@
     "summary": "Highly configurable panel to provide the information you want your chat to know. Change text and background color, add tabs and live updates",
     "supportEmail": "erik.guzman@gooseman.codes",
     "vendorCode": "",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "viewerSummary": "Highly configurable panel to provide the information you want your chat to know. Change text and background color, add tabs and live updates",
-    "viewerUrl": "http://localhost:8080/panel.html",
+    "viewerUrl": "http://localhost:8080/index.html",
     "viewerUrls": {
-      "mobile": "http://localhost:8080/panel.html",
-      "panel": "http://localhost:8080/panel.html",
-      "component": "http://localhost:8080/video_component.html"
+      "mobile": "http://localhost:8080/index.html",
+      "panel": "http://localhost:8080/index.html",
+      "component": "http://localhost:8080/index.html"
     },
     "views": {
       "mobile": {
-        "viewerUrl": "http://localhost:8080/panel.html"
+        "viewerUrl": "http://localhost:8080/index.html"
       },
       "panel": {
-        "viewerUrl": "http://localhost:8080/panel.html",
+        "viewerUrl": "http://localhost:8080/index.html",
         "height": 500,
         "canLinkExternalContent": true
       },
       "component": {
-        "viewerUrl": "http://localhost:8080/video_component.html",
-        "aspectWidth": 2600,
-        "aspectHeight": 4400,
+        "viewerUrl": "http://localhost:8080/index.html",
+        "aspectWidth": 0,
+        "aspectHeight": 0,
         "aspectRatioX": 41600,
         "aspectRatioY": 39600,
-        "autoscale": true,
         "scalePixels": 300,
         "targetHeight": 5866,
         "size": 0,
-        "zoom": true,
-        "zoomPixels": 300,
-        "canLinkExternalContent": false
+        "zoom": false,
+        "zoomPixels": 0,
+        "canLinkExternalContent": false,
+        "autoScale": true
       },
       "config": {
-        "viewerUrl": "http://localhost:8080/config.html",
+        "viewerUrl": "http://localhost:8080/index.html",
         "canLinkExternalContent": true
       },
       "liveConfig": {
-        "viewerUrl": "http://localhost:8080/dashboard_config.html",
+        "viewerUrl": "http://localhost:8080/index.html",
         "canLinkExternalContent": true
       }
     },
@@ -142,5 +136,6 @@
   "frontendCommand": "",
   "frontendFolderName": "",
   "name": "Better Information Panel",
-  "version": 1
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
 }
