@@ -2,8 +2,7 @@ import { observable, computed, action, makeObservable } from "mobx";
 import TabModel from "../model/TabModel";
 import { uuid } from "../../services/Utils";
 import {
-  setPanelInformation,
-  getPanelInformation
+  queryPanelInformation
 } from "../../services/Ebs";
 import {
   DEFAULT_BODY_TEXT,
@@ -12,10 +11,11 @@ import {
   ACTIVE_STEP_3,
   ACTIVE_STEP_4,
 } from "../../services/constants";
+import { path } from 'ramda';
 
 export default class TabsStore {
   tabs = [];
-  token = null;
+  client = null;
   saveState = "";
   loadingState = "pending";
   activeStep = ACTIVE_STEP_1;
@@ -29,7 +29,7 @@ export default class TabsStore {
   constructor() {
     makeObservable(this, {
       tabs: observable,
-      token: observable,
+      client: observable,
       saveState: observable,
       loadingState: observable,
       activeStep: observable,
@@ -88,10 +88,14 @@ export default class TabsStore {
 
   fetchTabs() {
     this.loadingState = "pending"
-    getPanelInformation(this.token).then(
+    queryPanelInformation(this.client).then(
       // inline created action
-      action("fetchSuccess", result => {
+      action("fetchSuccess", ({ data }) => {
         this.loadingState = "done"
+
+        const result = path(['channel', 'bipConfig'], data)
+        console.log(result)
+
         if (!result.tabs) {
           this.addTab();
           return;
@@ -101,17 +105,14 @@ export default class TabsStore {
 
         // Check if the setting are defined from server, could be undefined
         // And screw shit up, use default state
-        if (result.videoComponentTransparent !== undefined) {
-          this.videoComponentTransparent = result.videoComponentTransparent;
+        if (result.transparent !== undefined) {
+          this.videoComponentTransparent = result.transparent;
         }
-        if (result.videoComponentVisibility !== undefined) {
-          this.videoComponentVisibility = result.videoComponentVisibility;
+        if (result.visibility !== undefined) {
+          this.videoComponentVisibility = result.visibility;
         }
-        if (result.videoToggleButtonPosition !== undefined) {
-          this.videoToggleButtonPosition = result.videoToggleButtonPosition;
-        }
-        if (result.videoToggleImageUrl !==  undefined) {
-          this.videoToggleImageUrl = result.videoToggleImageUrl;
+        if (result.togglePosition !== undefined) {
+          this.videoToggleButtonPosition = result.togglePosition;
         }
 
         this.tabs = result.tabs.map((tab) => {
@@ -126,7 +127,7 @@ export default class TabsStore {
   }
 
   updateTabs() {
-    getPanelInformation(this.token).then(
+    queryPanelInformation(this.client).then(
       // inline created action
       action("fetchSuccess", result => {
         if (!result.tabs) {
@@ -147,17 +148,17 @@ export default class TabsStore {
 
   saveTabs() {
     this.saveState = "pending"
-    setPanelInformation(this.token, this.toJSON()).then(
-      // inline created action
-      action("fetchSuccess", result => {
-        this.saveState = "done"
-        this.activeStep = ACTIVE_STEP_4;
-      }),
-      // inline created action
-      action("fetchError", error => {
-        this.saveState = "error"
-      })
-    )
+      setPanelInformation(this.token, this.toJSON()).then(
+        // inline created action
+        action("fetchSuccess", result => {
+          this.saveState = "done"
+          this.activeStep = ACTIVE_STEP_4;
+        }),
+        // inline created action
+        action("fetchError", error => {
+          this.saveState = "error"
+        })
+      )
   }
 
   toJSON() {
@@ -167,10 +168,9 @@ export default class TabsStore {
 
     return {
       tabs: jTabs,
-      videoComponentVisibility: this.videoComponentVisibility,
-      videoComponentTransparent: this.videoComponentTransparent,
-      videoToggleImageUrl: this.videoToggleImageUrl,
-      videoToggleButtonPosition: this.videoToggleButtonPosition,
+      visibility: this.videoComponentVisibility,
+      transparent: this.videoComponentTransparent,
+      togglePosition: this.videoToggleButtonPosition,
     };
   }
 }

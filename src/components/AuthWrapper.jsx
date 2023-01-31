@@ -8,6 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
+import { initClient } from '../services/Ebs';
 
 const styles = theme => ({
   root: {
@@ -34,10 +35,10 @@ class AuthWrapper extends Component {
     // Listen to on Auth callback to get token
     window.Twitch.ext.onAuthorized((auth) => {
       // If token is null then that means this is the first load
-      if (!this.props.tabsStore.token) {
+      if (!this.props.tabsStore.client) {
         shouldFetch = true;
       }
-      this.props.tabsStore.token = auth.token;
+      this.props.tabsStore.client = initClient(auth.token);
 
       if (shouldFetch) {
         this.props.tabsStore.fetchTabs();

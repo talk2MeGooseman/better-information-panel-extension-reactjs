@@ -16,6 +16,7 @@ import { configure } from "mobx"
 configure({
     enforceActions: "never",
 })
+
 // Get the params from the url
 const params = new URLSearchParams(window.location.search)
 let viewComponent;
