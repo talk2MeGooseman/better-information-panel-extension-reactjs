@@ -38,7 +38,6 @@ export default class TabModel {
 
   toJSON() {
     return {
-      id: this.id,
       title: this.title,
       textColor: this.textColor,
       bgColor: this.bgColor,

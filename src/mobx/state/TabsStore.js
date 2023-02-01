@@ -2,7 +2,8 @@ import { observable, computed, action, makeObservable } from "mobx";
 import TabModel from "../model/TabModel";
 import { uuid } from "../../services/Utils";
 import {
-  queryPanelInformation
+  queryPanelInformation,
+  setPanelInformation
 } from "../../services/Ebs";
 import {
   DEFAULT_BODY_TEXT,
@@ -148,7 +149,7 @@ export default class TabsStore {
 
   saveTabs() {
     this.saveState = "pending"
-      setPanelInformation(this.token, this.toJSON()).then(
+      setPanelInformation(this.client, this.toJSON()).then(
         // inline created action
         action("fetchSuccess", result => {
           this.saveState = "done"
