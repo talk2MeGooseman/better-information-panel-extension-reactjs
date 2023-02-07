@@ -12,13 +12,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: bahmutov/npm-install@v1
       - name: Build app
         run: yarn build
         env:
           CI: false
-      - name: Move icons to CSS folder
-        run: mkdir build/static/css/static && mv build/static/media build/static/css/static/media
       - name: Zip Release Build
         uses: thedoctor0/zip-release@main
         with:
