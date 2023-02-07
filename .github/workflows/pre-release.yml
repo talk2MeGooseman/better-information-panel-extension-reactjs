@@ -23,7 +23,7 @@ jobs:
         with:
           type: 'zip'
           filename: 'release.zip'
-          directory: 'build/'
+          directory: 'dist/'
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
