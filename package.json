@@ -42,7 +42,7 @@
     "resolve": "1.6.0",
     "showdown": "^1.9.1",
     "strip": "^3.0.0",
-    "style-loader": "0.19.0",
+    "style-loader": "0.23.1",
     "styled-components": "^5.3.6",
     "typeface-roboto": "^0.0.54",
     "url-search-params-polyfill": "^6.0.0",
