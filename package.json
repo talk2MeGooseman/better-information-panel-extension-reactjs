@@ -37,7 +37,7 @@
     "react-dom": "^18.0.0",
     "react-html-parser": "^2.0.2",
     "react-simplemde-editor": "^4.0.2",
-    "react-sortable-hoc": "^1.9.1",
+    "react-sortable-hoc": "^2.0.0",
     "react-swipeable-views": "^0.13.3",
     "resolve": "1.6.0",
     "showdown": "^1.9.1",
